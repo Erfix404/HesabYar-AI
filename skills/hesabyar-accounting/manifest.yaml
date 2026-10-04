@@ -1,0 +1,13 @@
+version: "0.1"
+name: hesabyar
+description: "ابزارهای قطعی حسابداری و مالیات ایران برای ایجنت‌ها: اعتبارسنجی صورت‌های مالی، پارامترهای مالیاتی تاریخ‌دار، ماشین‌حساب ماده ۶، تقویم مالیاتی و اعتبارسنجی آفلاین صورتحساب مؤدیان."
+
+# Sub-skills loaded on demand — read the specific file when the task matches.
+# All instructions enforce: LLM never computes; always call the deterministic tools;
+# always echo source_id + verification_status; fail-closed behavior is by design.
+
+metadata:
+  language: fa+en
+  audience: [accountants, auditors, developers, tax-advisors, ai-agents]
+  repository: https://github.com/Amirezamky9/HesabYar-AI
+  architecture: docs/ARCHITECTURE.md (normative)

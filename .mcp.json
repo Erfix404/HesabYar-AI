@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "hesabyar": {
+      "command": "uv",
+      "args": [
+        "run",
+        "--with",
+        "mcp",
+        "hesabyar-mcp"
+      ],
+      "env": {
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONUTF8": "1"
+      }
+    }
+  }
+}
