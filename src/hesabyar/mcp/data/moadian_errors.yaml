@@ -1,0 +1,180 @@
+# Moadian system error knowledge base (سامانه مؤدیان).
+#
+# Schema per entry:
+#   code:                 numeric error code as shown in the taxpayer workspace
+#   title:                short Persian title
+#   cause:                why the error occurs
+#   resolution:           step-by-step Persian resolution
+#   severity:             blocker | error | warning | info
+#   verification_status:  per docs/CURRENT_RULES_1405.md labels —
+#                         CORROBORATED_CURRENT (multi-source, snapshot pending)
+#                         or DISCOVERY_ONLY (do not treat as authoritative)
+#   source:               where this entry was documented
+#
+# NOTE: entries below are collected from public support/documentation pages
+# (sarayehesabdar.ir, sppcco.com, hesabdaranebartar.com, mymotamed.ir) and are
+# CORROBORATED_CURRENT at best. Pin an official INTA error-code circular before
+# treating these as production-authoritative.
+
+errors:
+  - code: "1105"
+    title: عدم اعتبار مقدار فیلد سریال صورتحساب از نظر داده‌ای
+    cause: سریال داخلی صورتحساب (serial) نامعتبر، تکراری یا ناسازگار با تاریخ ثبت است.
+    resolution: >
+      سریال صورتحساب را مطابق قاعده سامانه بازتولید کنید؛ تاریخ ثبت در حافظه مالیاتی را با
+      تاریخ صدور صورتحساب هم‌تراز کنید و از ارسال سریال تکراری خودداری کنید.
+    severity: error
+    verification_status: CORROBORATED_CURRENT
+    source: sarayehesabdar.ir/list-of-taxpayer-system-errors (1404/02)
+
+  - code: "4110"
+    title: خطای عمومی اعتبارسنجی ساختار داده
+    cause: ساختار JSON ارسالی با اسکیمای الگوی موردنظر (inty) تطابق ندارد — فیلد الزامی غایب یا نوع داده اشتباه.
+    resolution: >
+      ساختار payload را با اسکیمای رسمی الگو (نوع ۱ تا ۷) مقایسه کنید؛ فیلدهای الزامی هدر/بدنه/پرداخت را تکمیل و
+      نوع داده‌ها (رشته/عدد) را دقیقاً مطابق مستندات بفرستید.
+    severity: blocker
+    verification_status: CORROBORATED_CURRENT
+    source: sppcco.com error list + mymotamed.ir
+
+  - code: "1101"
+    title: عدم اعتبار فیلد شناسه یکتای حافظه مالیاتی
+    cause: شناسه یکتای حافظه مالیاتی (Unique ID) غیرفعال، منقضی یا ناسازگار با مشخصات مودی است.
+    resolution: >
+      وضعیت حافظه مالیاتی را در کارپوشه بررسی و در صورت غیرفعالی، از مسیر «سایر درخواست‌ها» فعال‌سازی/به‌روزرسانی کنید؛
+      سپس توکن جدید بگیرید.
+    severity: blocker
+    verification_status: CORROBORATED_CURRENT
+    source: sppcco.com + limotx.ir/article/36
+
+  - code: "1102"
+    title: عدم اعتبار فیلد شماره اقتصادی
+    cause: کد اقتصادی مودی (فیلد economicCode) با پرونده سامانه تطابق ندارد.
+    resolution: کد اقتصادی را با کارت اقتصادی/کارپوشه تطبیق دهید؛ صفر و کاراکتر اضافی را حذف کنید.
+    severity: blocker
+    verification_status: CORROBORATED_CURRENT
+    source: sppcco.com error list
+
+  - code: "1103"
+    title: خطای احراز هویت — توکن نامعتبر
+    cause: توکن دریافت‌شده منقضی شده یا با کلید خصوصی/شناسه حافظه مالیاتی جفت نیست.
+    resolution: >
+      اعتبار کلیدها را با key_validator بررسی کنید، توکن جدید از مسیر get_token دریافت و در همان نشست استفاده شود.
+    severity: blocker
+    verification_status: CORROBORATED_CURRENT
+    source: sppcco.com + arjavand/moadian docs
+
+  - code: "1104"
+    title: خطای امضای دیجیتال
+    cause: امضای JWS با گواهی توکن‌ساز تطابق ندارد یا الگوریتم/زمان امضا نامعتبر است.
+    resolution: >
+      ساعت سیستم را NTP-sync کنید، از همان کلید خصوصی ثبت‌شده در حافظه مالیاتی برای امضا استفاده و فرمت JWS را بازبینی کنید.
+    severity: blocker
+    verification_status: CORROBORATED_CURRENT
+    source: sppcco.com error list
+
+  - code: "1111"
+    title: عدم هم‌خوانی تاریخ ثبت با تاریخ/زمان صدور
+    cause: تاریخ ثبت در حافظه مالیاتی با فیلد indatim/indati2m صورتحساب یکسان نیست یا سریال داخلی تکراری است.
+    resolution: indatim را با زمان واقعی صدور (میلی‌ثانیه) بفرستید و سریال هر صورتحساب را یکتا نگه دارید.
+    severity: error
+    verification_status: CORROBORATED_CURRENT
+    source: mymotamed.ir/common-errors
+
+  - code: "1416"
+    title: عدم تعیین نوع پرواز در الگوی صورتحساب
+    cause: در الگوهای صادراتی، فیلد مربوط به نوع پرواز/حمل الزامی است اما خالی ارسال شده.
+    resolution: برای صورتحساب‌های صادراتی فیلدهای مخصوص حمل (نوع پرواز/شماره بارنامه) را تکمیل کنید.
+    severity: error
+    verification_status: CORROBORATED_CURRENT
+    source: sarayehesabdar.ir/list-of-taxpayer-system-errors
+
+  - code: "2310"
+    title: عدم اعتبار مقدار فیلد شناسه کالا/خدمت
+    cause: شناسه کالا (sstid) با کدگذاری رسمی کالا و خدمات (System of Goods & Services) تطابق ندارد.
+    resolution: کد ۹ یا ۱۲ رقمی کالا را از سامانه کدگذاری دریافت و برای هر قلم body صحیح ارسال کنید.
+    severity: error
+    verification_status: CORROBORATED_CURRENT
+    source: sarayehesabdar.ir error list
+
+  - code: "2320"
+    title: عدم اعتبار مقدار فیلد عنوان کالا/خدمت
+    cause: عنوان (sstt) با شناسه کالا (sstid) هم‌خوان نیست یا کاراکتر غیرمجاز دارد.
+    resolution: عنوان دقیق فارسی مطابق شناسه کالا ارسال کنید؛ از توضیحات دلخواه و کاراکترهای کنترلی پرهیز کنید.
+    severity: warning
+    verification_status: CORROBORATED_CURRENT
+    source: sarayehesabdar.ir error list
+
+  - code: "2330"
+    title: عدم اعتبار مقدار فیلد مبلغ/نرخ
+    cause: مقادیر fee/am/vra/vam با قواعد محاسباتی الگو نمی‌خوانند (خطای جمع یا نرخ خارج از بازه).
+    resolution: محاسبات هر سطر (am=fee×تعداد−dis و vam بر اساس vra) را قبل از ارسال بازبینی کنید.
+    severity: error
+    verification_status: CORROBORATED_CURRENT
+    source: sarayehesabdar.ir error list
+
+  - code: "2340"
+    title: عدم اعتبار فیلد تخفیف
+    cause: مقادیر dis/adis/tprdis/tadis ناسازگارند یا تخفیف بیش از مبلغ کالاست.
+    resolution: زنجیره تخفیف سطر و کل (tprdis−tdis=tadis) را اصلاح کنید.
+    severity: error
+    verification_status: CORROBORATED_CURRENT
+    source: sarayehesabdar.ir error list
+
+  - code: "6115"
+    title: خطای مربوط به حد مجاز فروش (ماده ۶)
+    cause: فروش مودی از حد مجاز دوره گذشته و صدور فاکتور با وضعیت «عدول» انجام شده است.
+    resolution: >
+      ظرفیت را افزایش دهید (پرداخت نقدی/تودیع چک صیادی تا ۲۰ روز پس از پایان فصل/ضمانت‌نامه) و سپس
+      صورتحساب ارجاعی اصلاحی برای رفع برچسب عدول صادر کنید.
+    severity: blocker
+    verification_status: CORROBORATED_CURRENT
+    source: docs/research_tax_inflation.md §1.3 + sppcco.com
+
+  - code: "6120"
+    title: ناسازگاری فاکتور با وضعیت کارپوشه خریدار
+    cause: خریدار فاکتور را رد کرده یا وضعیت تایید در بازه ۳۰ روزه منقضی/خودکار شده است.
+    resolution: وضعیت صورتحساب را از بخش استعلام پیگیری کنید؛ برای اصلاح، صورتحساب اصلاحی صادر نمایید.
+    severity: warning
+    verification_status: CORROBORATED_CURRENT
+    source: sppcco.com + tax FAQ
+
+  - code: "6125"
+    title: عدم امکان انجام عملیات در کارپوشه
+    cause: وضعیت کارپوشه «غیر مجاز موقت» است — معمولاً به‌دلیل غیرفعال شدن شناسه یکتای حافظه مالیاتی.
+    resolution: علت تعلیق (مالیات معوقه/عدم ارسال فصلی) را برطرف و از کارپوشه درخواست رفع محدودیت ثبت کنید.
+    severity: blocker
+    verification_status: CORROBORATED_CURRENT
+    source: sppcco.com + limotx.ir/article/36
+
+  - code: "6130"
+    title: خطای درگاه پرداخت کارپوشه
+    cause: نشست پرداخت منقضی یا مبلغ با بدهی جاری ناسازگار است.
+    resolution: از درگاه رسمی کارپوشه مجدداً اقدام کنید؛ شماره سند پرداخت را برای پیگیری ثبت کنید.
+    severity: warning
+    verification_status: DISCOVERY_ONLY
+    source: sppcco.com error list
+
+  - code: "6131"
+    title: تکراری بودن شناسه یکتای مالیاتی صورتحساب
+    cause: taxid ارسالی برای صورتحسابی دیگر قبلاً ثبت شده است (شناسه یکتا باید سراسری یکتا باشد).
+    resolution: الگوریتم ساخت taxid (شماره اقتصادی+تاریخ+سریال) را بازتولید کنید؛ taxid تکراری ارسال نکنید.
+    severity: error
+    verification_status: CORROBORATED_CURRENT
+    source: sarayehesabdar.ir error list
+
+  - code: "6132"
+    title: عدم انطباق taxid با محتوای صورتحساب
+    cause: شناسه یکتای مالیاتی با مشخصات صورتحساب (اقتصادی/تاریخ/سریال) بازسازی نمی‌شود.
+    resolution: taxid را طبق دستورالعمل از روی محتوای نهایی صورتحساب محاسبه و مجدد ارسال کنید.
+    severity: error
+    verification_status: CORROBORATED_CURRENT
+    source: sarayehesabdar.ir error list
+
+  - code: "8010"
+    title: خطای استعلام وضعیت صورتحساب
+    cause: در زمان جمع‌آوری استعلام، وب‌سرویس استعلام با وضعیت غیرمنتظره پاسخ داده یا uid یافت نشده.
+    resolution: با referenceNumber/uid صحیح استعلام بگیرید؛ در صورت تداوم، وضعیت کارپوشه و لاگ ارسال را بررسی کنید.
+    severity: warning
+    verification_status: CORROBORATED_CURRENT
+    source: hesabdaranebartar.com/blog/1072

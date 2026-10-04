@@ -1,0 +1,1841 @@
+_comment: 'Golden eval cases for the HesabYar MCP tool layer. Frozen from scripts/gen_golden.py; every case runs through hesabyar.mcp.server._dispatch
+  (the exact surface an MCP client hits). `expect` is a subset-match contract: dicts must contain the pinned keys with equal
+  values; lists must have the same length with element-wise subset matches. Review expectations against docs/CURRENT_RULES_1405.md
+  before regenerating.'
+cases:
+- id: validate_statements_sample
+  tool: validate_statements
+  args:
+    statements:
+      balance_sheet: &id001
+        cash_and_equivalents: 500000000
+        short_term_investments: 100000000
+        trade_receivables: 300000000
+        other_receivables: 50000000
+        prepayments: 30000000
+        inventory: 400000000
+        other_current_assets: 20000000
+        current_assets_items:
+        - key: cash_and_equivalents
+          amount: 500000000
+        - key: short_term_investments
+          amount: 100000000
+        - key: trade_receivables
+          amount: 300000000
+        - key: other_receivables
+          amount: 50000000
+        - key: prepayments
+          amount: 30000000
+        - key: inventory
+          amount: 400000000
+        - key: other_current_assets
+          amount: 20000000
+        total_current_assets: 1400000000
+        property_plant_equipment: 3000000000
+        intangible_assets: 200000000
+        long_term_investments: 300000000
+        deferred_tax_assets: 50000000
+        non_current_assets_items:
+        - key: property_plant_equipment
+          amount: 3000000000
+        - key: intangible_assets
+          amount: 200000000
+        - key: long_term_investments
+          amount: 300000000
+        - key: deferred_tax_assets
+          amount: 50000000
+        total_non_current_assets: 3550000000
+        total_assets: 4950000000
+        trade_payables: 400000000
+        short_term_borrowings: 300000000
+        income_tax_payable: 100000000
+        provisions_current: 50000000
+        other_current_liabilities: 150000000
+        current_liabilities_items:
+        - key: trade_payables
+          amount: 400000000
+        - key: short_term_borrowings
+          amount: 300000000
+        - key: income_tax_payable
+          amount: 100000000
+        - key: provisions_current
+          amount: 50000000
+        - key: other_current_liabilities
+          amount: 150000000
+        total_current_liabilities: 1000000000
+        long_term_borrowings: 800000000
+        deferred_tax_liabilities: 100000000
+        provisions_non_current: 100000000
+        employee_benefits: 200000000
+        non_current_liabilities_items:
+        - key: long_term_borrowings
+          amount: 800000000
+        - key: deferred_tax_liabilities
+          amount: 100000000
+        - key: provisions_non_current
+          amount: 100000000
+        - key: employee_benefits
+          amount: 200000000
+        total_non_current_liabilities: 1200000000
+        total_liabilities: 2200000000
+        share_capital: 1500000000
+        legal_reserve: 200000000
+        retained_earnings: 1050000000
+        equity_items:
+        - key: share_capital
+          amount: 1500000000
+        - key: legal_reserve
+          amount: 200000000
+        - key: retained_earnings
+          amount: 1050000000
+        total_equity: 2750000000
+      income_statement:
+        classification_method: nature_of_expense
+        revenue: 3000000000
+        other_income: 100000000
+        changes_in_inventory: 50000000
+        raw_materials_consumed: 1200000000
+        employee_benefits: 600000000
+        depreciation: 200000000
+        other_expenses: 300000000
+        total_expenses: 2250000000
+        operating_profit: 850000000
+        finance_costs: 100000000
+        share_of_associates: 50000000
+        profit_before_tax: 800000000
+        tax_expense: 200000000
+        discontinued_operations: 0
+        net_profit: 600000000
+        owners_of_parent: 550000000
+        non_controlling_interests: 50000000
+      comprehensive_income:
+        net_profit: 600000000
+        subtotal_not_reclassified: 20000000
+        subtotal_reclassified: 30000000
+        total_comprehensive_income: 650000000
+        owners_of_parent: 600000000
+        non_controlling_interests: 50000000
+        other_comprehensive_income: 50000000
+      equity_changes:
+        opening_balance: 2200000000
+        retrospective_application: 0
+        retrospective_restatement: 0
+        adjusted_opening_balance: 2200000000
+        net_profit: 600000000
+        other_comprehensive_income: 50000000
+        total_comprehensive_income: 650000000
+        capital_contributions: 0
+        distributions_to_owners: 100000000
+        changes_in_ownership: 0
+        total_owner_transactions: -100000000
+        closing_balance:
+          total_equity: 2750000000
+          share_capital: 1500000000
+          retained_earnings: 1050000000
+      cash_flow:
+        method: indirect
+        beginning_cash: 400000000
+        net_profit_before_tax: 800000000
+        depreciation: 200000000
+        amortization: 0
+        provisions: 50000000
+        impairment_losses: 0
+        foreign_exchange_gains_losses: 0
+        gains_losses_on_disposal: -20000000
+        change_in_receivables: -50000000
+        change_in_inventory: -30000000
+        change_in_payables: 40000000
+        change_in_other_working_capital: -310000000
+        income_tax_paid: -180000000
+        other_adjustments: 0
+        net_cash_from_operating: 860000000
+        net_cash_from_investing: -300000000
+        net_cash_from_financing: -460000000
+        net_change_in_cash: 100000000
+        effect_of_exchange_rate: 0
+        ending_cash: 500000000
+        non_cash_transactions_disclosed: true
+        balance_sheet: *id001
+  expect:
+    summary:
+      total: 36
+      pass: 33
+      fail: 0
+      error: 0
+      not_applicable: 3
+    results:
+    - rule_id: BS001
+      outcome: pass
+      severity: error
+      message: ''
+      actual: '0'
+      refs:
+      - '1.55'
+    - rule_id: BS002
+      outcome: pass
+      severity: error
+      message: ''
+      actual: '0'
+      refs:
+      - '1.62'
+    - rule_id: BS003
+      outcome: pass
+      severity: error
+      message: ''
+      actual: '0'
+      refs:
+      - '1.62'
+    - rule_id: BS004
+      outcome: pass
+      severity: error
+      message: ''
+      actual: '0'
+      refs:
+      - '1.68'
+    - rule_id: BS005
+      outcome: pass
+      severity: error
+      message: ''
+      actual: '0'
+      refs:
+      - '1.55'
+    - rule_id: BS006
+      outcome: pass
+      severity: error
+      message: ''
+      actual: '0'
+      refs:
+      - '1.69'
+    - rule_id: BS007
+      outcome: pass
+      severity: error
+      message: ''
+      actual: '0'
+      refs:
+      - '1.69'
+    - rule_id: BS008
+      outcome: pass
+      severity: error
+      message: ''
+      actual: '0'
+      refs:
+      - '1.108'
+    - rule_id: BS-W01
+      outcome: pass
+      severity: warning
+      message: ''
+      actual: '1.4'
+      refs: []
+    - rule_id: BS-W02
+      outcome: pass
+      severity: warning
+      message: ''
+      actual: '0.8'
+      refs: []
+    - rule_id: BS-W03
+      outcome: pass
+      severity: warning
+      message: ''
+      actual: '0.4444444444444444444444444444'
+      refs: []
+    - rule_id: IS001
+      outcome: pass
+      severity: error
+      message: ''
+      actual: '0'
+      refs:
+      - '1.96'
+    - rule_id: IS002
+      outcome: pass
+      severity: error
+      message: ''
+      actual: '0'
+      refs:
+      - '1.96'
+    - rule_id: IS003
+      outcome: not_applicable
+      severity: error
+      message: Skipped (applies to function_of_expense)
+      actual: null
+      refs:
+      - '1.97'
+    - rule_id: IS004
+      outcome: not_applicable
+      severity: error
+      message: Skipped (applies to function_of_expense)
+      actual: null
+      refs:
+      - '1.97'
+    - rule_id: IS005
+      outcome: pass
+      severity: error
+      message: ''
+      actual: '0'
+      refs:
+      - '1.83'
+    - rule_id: IS006
+      outcome: pass
+      severity: error
+      message: ''
+      actual: '0'
+      refs:
+      - '1.83'
+    - rule_id: IS007
+      outcome: pass
+      severity: error
+      message: ''
+      actual: '0'
+      refs:
+      - '1.83'
+    - rule_id: CI001
+      outcome: pass
+      severity: error
+      message: ''
+      actual: '0'
+      refs:
+      - '1.100'
+    - rule_id: CI002
+      outcome: pass
+      severity: error
+      message: ''
+      actual: '0'
+      refs:
+      - '1.100'
+    - rule_id: CI003
+      outcome: not_applicable
+      severity: error
+      message: Skipped (applies to items_not_reclassified)
+      actual: null
+      refs:
+      - '1.101'
+    - rule_id: EC001
+      outcome: pass
+      severity: error
+      message: ''
+      actual: '0'
+      refs:
+      - '1.108'
+    - rule_id: EC002
+      outcome: pass
+      severity: error
+      message: ''
+      actual: '0'
+      refs:
+      - '1.108'
+    - rule_id: EC003
+      outcome: pass
+      severity: error
+      message: ''
+      actual: '0'
+      refs:
+      - '1.108'
+    - rule_id: EC004
+      outcome: pass
+      severity: error
+      message: ''
+      actual: '0'
+      refs:
+      - '1.108'
+    - rule_id: CF001
+      outcome: pass
+      severity: error
+      message: ''
+      actual: '0'
+      refs:
+      - '2'
+    - rule_id: CF002
+      outcome: pass
+      severity: error
+      message: ''
+      actual: '0'
+      refs:
+      - '2'
+    - rule_id: CF003
+      outcome: pass
+      severity: error
+      message: ''
+      actual: '0'
+      refs:
+      - '2'
+    - rule_id: CF004
+      outcome: pass
+      severity: error
+      message: ''
+      actual: '0'
+      refs:
+      - '2'
+    - rule_id: CF005
+      outcome: pass
+      severity: error
+      message: ''
+      actual: null
+      refs:
+      - '2'
+    - rule_id: XC001
+      outcome: pass
+      severity: error
+      message: ''
+      actual: '0'
+      refs: []
+    - rule_id: XC002
+      outcome: pass
+      severity: error
+      message: ''
+      actual: '0'
+      refs: []
+    - rule_id: XC003
+      outcome: pass
+      severity: error
+      message: ''
+      actual: '0'
+      refs: []
+    - rule_id: XC004
+      outcome: pass
+      severity: error
+      message: ''
+      actual: '0'
+      refs: []
+    - rule_id: XC005
+      outcome: pass
+      severity: error
+      message: ''
+      actual: '0'
+      refs: []
+    - rule_id: XC-W01
+      outcome: pass
+      severity: warning
+      message: ''
+      actual: '0'
+      refs: []
+- id: validate_rule_bs001_fail
+  tool: validate_rule
+  args:
+    rule_id: BS001
+    statements:
+      balance_sheet:
+        total_assets: 10
+        total_liabilities: 6
+        total_equity: 5
+  expect:
+    rule_id: BS001
+    outcome: fail
+    severity: error
+    message: 'ترازنامه تراز نیست (اختلاف: -1)'
+    actual: '-1'
+    explanation: 'فرمول: total_assets - (total_liabilities + total_equity) = -1 — باید برابر 0 (با تحمل 0.01) باشد. مقدار
+      به‌دست‌آمده -1 است. مرجع: استاندارد 1.55'
+    refs:
+    - '1.55'
+- id: validate_rule_bs001_pass
+  tool: validate_rule
+  args:
+    rule_id: BS001
+    statements:
+      balance_sheet:
+        total_assets: 11
+        total_liabilities: 6
+        total_equity: 5
+  expect:
+    rule_id: BS001
+    outcome: pass
+    severity: error
+    message: ''
+    actual: '0'
+    refs:
+    - '1.55'
+- id: validate_rule_cf002_fail
+  tool: validate_rule
+  args:
+    rule_id: CF002
+    statements:
+      cash_flow:
+        beginning_cash: 400
+        net_change_in_cash: 100
+        effect_of_exchange_rate: 0
+        ending_cash: 499
+  expect:
+    rule_id: CF002
+    outcome: fail
+    severity: error
+    message: مانده پایان مطابقت ندارد
+    actual: '1'
+    explanation: 'فرمول: (beginning_cash + net_change_in_cash + effect_of_exchange_rate) - ending_cash = 1 — باید برابر 0
+      (با تحمل 0.01) باشد. مقدار به‌دست‌آمده 1 است. مرجع: استاندارد 2'
+    refs:
+    - '2'
+- id: validate_rule_unknown_id
+  tool: validate_rule
+  args:
+    rule_id: ZZ999
+    statements: {}
+  expect:
+    error: '''ZZ999'''
+    code: KeyError
+- id: vat_rate_1402
+  tool: check_tax_parameter
+  args:
+    name: vat_rate
+    on_date: 1402/06/01
+  expect:
+    name: vat_rate
+    value: '0.09'
+    unit: rate
+    on_date: 1402/06/01
+    effective_from: 1400/04/01
+    effective_to: 1402/12/29
+    source_id: TAX-ADD-1400
+    verification_status: CORROBORATED_CURRENT
+    note: نرخ پایه قانون دائمی ۹٪
+- id: vat_rate_boundary_1402_12_29
+  tool: check_tax_parameter
+  args:
+    name: vat_rate
+    on_date: 1402/12/29
+  expect:
+    name: vat_rate
+    value: '0.09'
+    unit: rate
+    on_date: 1402/12/29
+    effective_from: 1400/04/01
+    effective_to: 1402/12/29
+    source_id: TAX-ADD-1400
+    verification_status: CORROBORATED_CURRENT
+    note: نرخ پایه قانون دائمی ۹٪
+- id: vat_rate_boundary_1403_01_01
+  tool: check_tax_parameter
+  args:
+    name: vat_rate
+    on_date: 1403/01/01
+  expect:
+    name: vat_rate
+    value: '0.10'
+    unit: rate
+    on_date: 1403/01/01
+    effective_from: 1403/01/01
+    effective_to: null
+    source_id: TAX-ADD-1400
+    verification_status: CORROBORATED_CURRENT
+    note: افزایش ۱ واحد درصدی طبق بند (ر) تبصره ۶ بودجه ۱۴۰۳؛ ۱۰٪ تا ابلاغ نرخ جدید
+- id: vat_rate_1405
+  tool: check_tax_parameter
+  args:
+    name: vat_rate
+    on_date: 1405/06/01
+  expect:
+    name: vat_rate
+    value: '0.10'
+    unit: rate
+    on_date: 1405/06/01
+    effective_from: 1403/01/01
+    effective_to: null
+    source_id: TAX-ADD-1400
+    verification_status: CORROBORATED_CURRENT
+    note: افزایش ۱ واحد درصدی طبق بند (ر) تبصره ۶ بودجه ۱۴۰۳؛ ۱۰٪ تا ابلاغ نرخ جدید
+- id: article_84_1405
+  tool: check_tax_parameter
+  args:
+    name: article_84_annual_salary_exemption
+    on_date: 1405/03/01
+  expect:
+    name: article_84_annual_salary_exemption
+    value: '4800000000'
+    unit: IRR
+    on_date: 1405/03/01
+    effective_from: 1405/01/01
+    effective_to: null
+    source_id: TAX-BUDGET-1405-PARAMS
+    verification_status: CORROBORATED_CURRENT
+    note: معافیت سالانه ۱۴۰۵ — نرخ‌های پلکانی حقوق باید جداگانه مدل شوند
+- id: article_84_before_effective_error
+  tool: check_tax_parameter
+  args:
+    name: article_84_annual_salary_exemption
+    on_date: 1404/06/01
+  expect:
+    error: Parameter 'article_84_annual_salary_exemption' has no interval covering 1404/06/01; refusing to guess a value (fail-closed).
+    code: PARAMETER_NOT_EFFECTIVE
+- id: article_101_1405
+  tool: check_tax_parameter
+  args:
+    name: article_101_annual_business_exemption
+    on_date: 1405/06/01
+  expect:
+    name: article_101_annual_business_exemption
+    value: '2800000000'
+    unit: IRR
+    on_date: 1405/06/01
+    effective_from: 1405/01/01
+    effective_to: null
+    source_id: TAX-BUDGET-1405-PARAMS
+    verification_status: CORROBORATED_CURRENT
+    note: مبنای حداقل فروش سالانه ماده ۶ برای واحدهای بدون سابقه
+- id: article_100_1404
+  tool: check_tax_parameter
+  args:
+    name: article_100_flat_tax_sales_ceiling
+    on_date: 1404/09/01
+  expect:
+    name: article_100_flat_tax_sales_ceiling
+    value: '720000000000'
+    unit: IRR
+    on_date: 1404/09/01
+    effective_from: 1404/01/01
+    effective_to: null
+    source_id: TAX-BUDGET-1405-PARAMS
+    verification_status: CORROBORATED_CURRENT
+    note: مربوط به عملکرد ۱۴۰۴ / فرآیند اداری ۱۴۰۵ — سال عملکرد و سال ابراز جدا مدل شده‌اند
+- id: article_6_coeff_1402_08_23
+  tool: check_tax_parameter
+  args:
+    name: article_6_sales_cap_coefficient
+    on_date: 1402/08/23
+  expect:
+    name: article_6_sales_cap_coefficient
+    value: '3'
+    unit: multiplier
+    on_date: 1402/08/23
+    effective_from: 1399/01/01
+    effective_to: 1402/08/23
+    source_id: TAX-POS-LAW-1398
+    verification_status: CORROBORATED_CURRENT
+    note: ضریب اولیه قانون ۱۳۹۸
+- id: article_6_coeff_1402_08_24
+  tool: check_tax_parameter
+  args:
+    name: article_6_sales_cap_coefficient
+    on_date: 1402/08/24
+  expect:
+    name: article_6_sales_cap_coefficient
+    value: '5'
+    unit: multiplier
+    on_date: 1402/08/24
+    effective_from: 1402/08/24
+    effective_to: null
+    source_id: TAX-POS-LAW-1398
+    verification_status: CORROBORATED_CURRENT
+    note: ضریب ۵ برابر طبق ماده ۷ قانون تسهیل تکالیف مودیان (مصوب ۱۴۰۲/۰۸/۲۳)
+- id: article_6_coeff_1399
+  tool: check_tax_parameter
+  args:
+    name: article_6_sales_cap_coefficient
+    on_date: 1399/05/01
+  expect:
+    name: article_6_sales_cap_coefficient
+    value: '3'
+    unit: multiplier
+    on_date: 1399/05/01
+    effective_from: 1399/01/01
+    effective_to: 1402/08/23
+    source_id: TAX-POS-LAW-1398
+    verification_status: CORROBORATED_CURRENT
+    note: ضریب اولیه قانون ۱۳۹۸
+- id: confirmation_window_1405
+  tool: check_tax_parameter
+  args:
+    name: invoice_buyer_confirmation_window_days
+    on_date: 1405/01/15
+  expect:
+    name: invoice_buyer_confirmation_window_days
+    value: '30'
+    unit: days
+    on_date: 1405/01/15
+    effective_from: 1400/04/01
+    effective_to: null
+    source_id: TAX-ADD-1400
+    verification_status: CORROBORATED_CURRENT
+    note: عدم اظهارنظر در مهلت = تایید خودکار
+- id: unknown_parameter_error
+  tool: check_tax_parameter
+  args:
+    name: nonexistent_param
+    on_date: 1405/06/01
+  expect:
+    error: 'Unknown tax parameter: ''nonexistent_param''. Known: article_100_flat_tax_sales_ceiling, article_101_annual_business_exemption,
+      article_131_declared_income_growth_threshold, article_6_sales_cap_coefficient, article_84_annual_salary_exemption, invoice_buyer_confirmation_window_days,
+      vat_rate'
+    code: UNKNOWN_PARAMETER
+- id: parameter_bad_date_error
+  tool: check_tax_parameter
+  args:
+    name: vat_rate
+    on_date: not-a-date
+  expect:
+    error: 'Invalid Gregorian ISO date string ''not-a-date'': Invalid isoformat string: ''not-a-date'''
+    code: InvalidDateError
+- id: article6_cap_no_history
+  tool: calc_article6
+  args:
+    on_date: 1405/04/01
+    prior_period_taxable_sales: 0
+  expect:
+    coefficient: 5
+    basis: article_101
+    prior_period_taxable_sales: '0'
+    article_101_annual: '2800000000'
+    initial_cap: '14000000000'
+    on_date: 1405/04/01
+    source_id: TAX-POS-LAW-1398
+    verification_status: CORROBORATED_CURRENT
+    note: واحد بدون سابقه/فروش کمتر از معافیت ماده ۱۰۱ — مبنای قانونی ماده ۱۰۱
+- id: article6_cap_below_exemption
+  tool: calc_article6
+  args:
+    on_date: 1405/04/01
+    prior_period_taxable_sales: 2799999999
+  expect:
+    coefficient: 5
+    basis: article_101
+    prior_period_taxable_sales: '2799999999'
+    article_101_annual: '2800000000'
+    initial_cap: '14000000000'
+    on_date: 1405/04/01
+    source_id: TAX-POS-LAW-1398
+    verification_status: CORROBORATED_CURRENT
+    note: واحد بدون سابقه/فروش کمتر از معافیت ماده ۱۰۱ — مبنای قانونی ماده ۱۰۱
+- id: article6_cap_prior_basis
+  tool: calc_article6
+  args:
+    on_date: 1405/04/01
+    prior_period_taxable_sales: 2800000000
+  expect:
+    coefficient: 5
+    basis: prior_period
+    prior_period_taxable_sales: '2800000000'
+    article_101_annual: '2800000000'
+    initial_cap: '14000000000'
+    on_date: 1405/04/01
+    source_id: TAX-POS-LAW-1398
+    verification_status: CORROBORATED_CURRENT
+    note: 'مبنا: فروش مشمول دوره متناظر سال قبل که مالیات آن پرداخت یا ترتیب پرداخت آن داده شده'
+- id: article6_cap_prior_basis_1402
+  tool: calc_article6
+  args:
+    on_date: 1402/08/23
+    prior_period_taxable_sales: 1000000000
+  expect:
+    error: Parameter 'article_101_annual_business_exemption' has no interval covering 1402/08/23; refusing to guess a value
+      (fail-closed).
+    code: PARAMETER_NOT_EFFECTIVE
+- id: article6_devolution_safe
+  tool: calc_article6
+  args:
+    on_date: 1405/04/01
+    prior_period_taxable_sales: 2800000000
+    issued_in_period: 13999999999
+  expect:
+    coefficient: 5
+    basis: prior_period
+    prior_period_taxable_sales: '2800000000'
+    article_101_annual: '2800000000'
+    initial_cap: '14000000000'
+    on_date: 1405/04/01
+    source_id: TAX-POS-LAW-1398
+    verification_status: CORROBORATED_CURRENT
+    note: 'مبنا: فروش مشمول دوره متناظر سال قبل که مالیات آن پرداخت یا ترتیب پرداخت آن داده شده'
+    devolution_risk:
+      breached: false
+      overage: '0'
+      initial_cap: '14000000000'
+      issued_in_period: '13999999999'
+      buyer_vat_credit_at_risk: false
+      note: صدور در محدوده حد مجاز است
+      source_id: TAX-POS-LAW-1398
+      verification_status: CORROBORATED_CURRENT
+- id: article6_devolution_breach
+  tool: calc_article6
+  args:
+    on_date: 1405/04/01
+    prior_period_taxable_sales: 2800000000
+    issued_in_period: 14000000001
+  expect:
+    coefficient: 5
+    basis: prior_period
+    prior_period_taxable_sales: '2800000000'
+    article_101_annual: '2800000000'
+    initial_cap: '14000000000'
+    on_date: 1405/04/01
+    source_id: TAX-POS-LAW-1398
+    verification_status: CORROBORATED_CURRENT
+    note: 'مبنا: فروش مشمول دوره متناظر سال قبل که مالیات آن پرداخت یا ترتیب پرداخت آن داده شده'
+    devolution_risk:
+      breached: true
+      overage: '1'
+      initial_cap: '14000000000'
+      issued_in_period: '14000000001'
+      buyer_vat_credit_at_risk: true
+      note: صدور فراتر از حد مجاز = عدول؛ اعتبار مالیاتی خریدار قطع می‌شود و پس از افزایش سقف، صورتحساب ارجاعی اصلاحی لازم
+        است
+      source_id: TAX-POS-LAW-1398
+      verification_status: CORROBORATED_CURRENT
+- id: article6_cash_lever
+  tool: calc_article6
+  args:
+    on_date: 1405/06/01
+    prior_period_taxable_sales: 0
+    cash_payment: 100000000
+  expect:
+    cash_payment: '100000000'
+    vat_rate: '0.10'
+    unlocked_capacity: '1000000000'
+    on_date: 1405/06/01
+    source_id: TAX-ADD-1400
+    verification_status: CORROBORATED_CURRENT
+    note: هر ریال پرداخت نقدی مالیات، ظرفیت فروش به نسبت معکوس نرخ ارزش افزوده باز می‌کند
+- id: article6_cheque_ok
+  tool: calc_article6
+  args:
+    on_date: 1405/07/01
+    prior_period_taxable_sales: 0
+    quarter_end: 1405/06/31
+    cheque_due: 1405/07/20
+  expect:
+    eligible: true
+    quarter_end: 1405/06/31
+    cheque_due: 1405/07/20
+    deadline: 1405/07/20
+    days_over: 0
+    note: سررسید چک باید حداکثر ۲۰ روز پس از پایان فصل باشد
+- id: article6_cheque_late
+  tool: calc_article6
+  args:
+    on_date: 1405/07/01
+    prior_period_taxable_sales: 0
+    quarter_end: 1405/06/31
+    cheque_due: 1405/07/25
+  expect:
+    eligible: false
+    quarter_end: 1405/06/31
+    cheque_due: 1405/07/25
+    deadline: 1405/07/20
+    days_over: 5
+    note: سررسید چک بیش از ۲۰ روز پس از پایان فصل است — این تضمین واجد شرایط افزایش سقف نیست
+- id: calendar_mid_summer_1405
+  tool: tax_calendar_next
+  args:
+    on_date: 1405/05/11
+  expect:
+  - obligation: article_169_quarterly
+    description: صورت معاملات فصلی ماده ۱۶۹ — حداکثر ۴۵ روز پس از پایان فصل
+    due_date_jalali: 1405/05/14
+    due_date_gregorian: '2026-08-05'
+    days_remaining: 3
+    penalty_rule: جریمه ۱٪ مبلغ معاملات فصل (ماده ۱۹۹ ق.م.م) به‌ازای عدم تسلیم/تأخیر
+    source_id: TAX-QMM-CONSOLIDATED
+    verification_status: CORROBORATED_CURRENT
+    period_label: فصل بهار 1405
+    note: ''
+  - obligation: vat_return
+    description: اظهارنامه و پرداخت مالیات بر ارزش افزوده هر دوره — تا ۱۵ روز پس از پایان دوره
+    due_date_jalali: 1405/07/15
+    due_date_gregorian: '2026-10-07'
+    days_remaining: 66
+    penalty_rule: جریمه عدم تسلیم/تأخیر طبق ماده ۲۰ قانون ارزش افزوده (۱٪ عملکرد به‌ازای هر ماه تأخیر)
+    source_id: TAX-ADD-1400
+    verification_status: CORROBORATED_CURRENT
+    period_label: فصل تابستان 1405
+    note: ''
+  - obligation: annual_return
+    description: اظهارنامه مالیاتی عملکرد مشاغل — تا پایان خرداد سال بعد
+    due_date_jalali: 1406/03/31
+    due_date_gregorian: '2027-06-21'
+    days_remaining: 323
+    penalty_rule: جریمه ۱۰٪ درآمد مشمول (ماده ۱۹۲ ق.م.م — غیرقابل بخشودگی)
+    source_id: TAX-QMM-CONSOLIDATED
+    verification_status: CORROBORATED_CURRENT
+    period_label: عملکرد 1405 (مشاغل)
+    note: ''
+  - obligation: annual_return
+    description: اظهارنامه مالیاتی عملکرد اشخاص حقوقی — تا ۴ ماه پس از پایان سال مالی
+    due_date_jalali: 1406/04/29
+    due_date_gregorian: '2027-07-20'
+    days_remaining: 352
+    penalty_rule: جریمه ۱٪ مالیات متعلق به‌ازای هر ماه تأخیر (حداکثر ۲۵٪)؛ ماده ۱۹۲ ق.م.م
+    source_id: TAX-QMM-CONSOLIDATED
+    verification_status: CORROBORATED_CURRENT
+    period_label: سال مالی 1405 (اشخاص حقوقی)
+    note: ''
+- id: calendar_after_vat_deadline
+  tool: tax_calendar_next
+  args:
+    on_date: 1405/07/17
+  expect:
+  - obligation: article_169_quarterly
+    description: صورت معاملات فصلی ماده ۱۶۹ — حداکثر ۴۵ روز پس از پایان فصل
+    due_date_jalali: 1405/08/15
+    due_date_gregorian: '2026-11-06'
+    days_remaining: 28
+    penalty_rule: جریمه ۱٪ مبلغ معاملات فصل (ماده ۱۹۹ ق.م.م) به‌ازای عدم تسلیم/تأخیر
+    source_id: TAX-QMM-CONSOLIDATED
+    verification_status: CORROBORATED_CURRENT
+    period_label: فصل تابستان 1405
+    note: ''
+  - obligation: vat_return
+    description: اظهارنامه و پرداخت مالیات بر ارزش افزوده هر دوره — تا ۱۵ روز پس از پایان دوره
+    due_date_jalali: 1405/10/15
+    due_date_gregorian: '2027-01-05'
+    days_remaining: 88
+    penalty_rule: جریمه عدم تسلیم/تأخیر طبق ماده ۲۰ قانون ارزش افزوده (۱٪ عملکرد به‌ازای هر ماه تأخیر)
+    source_id: TAX-ADD-1400
+    verification_status: CORROBORATED_CURRENT
+    period_label: فصل پاییز 1405
+    note: ''
+  - obligation: annual_return
+    description: اظهارنامه مالیاتی عملکرد مشاغل — تا پایان خرداد سال بعد
+    due_date_jalali: 1406/03/31
+    due_date_gregorian: '2027-06-21'
+    days_remaining: 255
+    penalty_rule: جریمه ۱۰٪ درآمد مشمول (ماده ۱۹۲ ق.م.م — غیرقابل بخشودگی)
+    source_id: TAX-QMM-CONSOLIDATED
+    verification_status: CORROBORATED_CURRENT
+    period_label: عملکرد 1405 (مشاغل)
+    note: ''
+  - obligation: annual_return
+    description: اظهارنامه مالیاتی عملکرد اشخاص حقوقی — تا ۴ ماه پس از پایان سال مالی
+    due_date_jalali: 1406/04/29
+    due_date_gregorian: '2027-07-20'
+    days_remaining: 284
+    penalty_rule: جریمه ۱٪ مالیات متعلق به‌ازای هر ماه تأخیر (حداکثر ۲۵٪)؛ ماده ۱۹۲ ق.م.م
+    source_id: TAX-QMM-CONSOLIDATED
+    verification_status: CORROBORATED_CURRENT
+    period_label: سال مالی 1405 (اشخاص حقوقی)
+    note: ''
+- id: calendar_year_end_window
+  tool: tax_calendar_next
+  args:
+    on_date: 1405/12/20
+  expect:
+  - obligation: vat_return
+    description: اظهارنامه و پرداخت مالیات بر ارزش افزوده هر دوره — تا ۱۵ روز پس از پایان دوره
+    due_date_jalali: 1406/01/15
+    due_date_gregorian: '2027-04-04'
+    days_remaining: 24
+    penalty_rule: جریمه عدم تسلیم/تأخیر طبق ماده ۲۰ قانون ارزش افزوده (۱٪ عملکرد به‌ازای هر ماه تأخیر)
+    source_id: TAX-ADD-1400
+    verification_status: CORROBORATED_CURRENT
+    period_label: فصل زمستان 1405
+    note: ''
+  - obligation: article_169_quarterly
+    description: صورت معاملات فصلی ماده ۱۶۹ — حداکثر ۴۵ روز پس از پایان فصل
+    due_date_jalali: 1406/02/14
+    due_date_gregorian: '2027-05-04'
+    days_remaining: 54
+    penalty_rule: جریمه ۱٪ مبلغ معاملات فصل (ماده ۱۹۹ ق.م.م) به‌ازای عدم تسلیم/تأخیر
+    source_id: TAX-QMM-CONSOLIDATED
+    verification_status: CORROBORATED_CURRENT
+    period_label: فصل زمستان 1405
+    note: ''
+  - obligation: annual_return
+    description: اظهارنامه مالیاتی عملکرد مشاغل — تا پایان خرداد سال بعد
+    due_date_jalali: 1406/03/31
+    due_date_gregorian: '2027-06-21'
+    days_remaining: 102
+    penalty_rule: جریمه ۱۰٪ درآمد مشمول (ماده ۱۹۲ ق.م.م — غیرقابل بخشودگی)
+    source_id: TAX-QMM-CONSOLIDATED
+    verification_status: CORROBORATED_CURRENT
+    period_label: عملکرد 1405 (مشاغل)
+    note: ''
+  - obligation: annual_return
+    description: اظهارنامه مالیاتی عملکرد اشخاص حقوقی — تا ۴ ماه پس از پایان سال مالی
+    due_date_jalali: 1406/04/29
+    due_date_gregorian: '2027-07-20'
+    days_remaining: 131
+    penalty_rule: جریمه ۱٪ مالیات متعلق به‌ازای هر ماه تأخیر (حداکثر ۲۵٪)؛ ماده ۱۹۲ ق.م.م
+    source_id: TAX-QMM-CONSOLIDATED
+    verification_status: CORROBORATED_CURRENT
+    period_label: سال مالی 1405 (اشخاص حقوقی)
+    note: ''
+- id: calendar_leap_year_end_1403
+  tool: tax_calendar_next
+  args:
+    on_date: 1403/12/25
+  expect:
+  - obligation: vat_return
+    description: اظهارنامه و پرداخت مالیات بر ارزش افزوده هر دوره — تا ۱۵ روز پس از پایان دوره
+    due_date_jalali: 1404/01/15
+    due_date_gregorian: '2025-04-04'
+    days_remaining: 20
+    penalty_rule: جریمه عدم تسلیم/تأخیر طبق ماده ۲۰ قانون ارزش افزوده (۱٪ عملکرد به‌ازای هر ماه تأخیر)
+    source_id: TAX-ADD-1400
+    verification_status: CORROBORATED_CURRENT
+    period_label: فصل زمستان 1403
+    note: ''
+  - obligation: article_169_quarterly
+    description: صورت معاملات فصلی ماده ۱۶۹ — حداکثر ۴۵ روز پس از پایان فصل
+    due_date_jalali: 1404/02/14
+    due_date_gregorian: '2025-05-04'
+    days_remaining: 50
+    penalty_rule: جریمه ۱٪ مبلغ معاملات فصل (ماده ۱۹۹ ق.م.م) به‌ازای عدم تسلیم/تأخیر
+    source_id: TAX-QMM-CONSOLIDATED
+    verification_status: CORROBORATED_CURRENT
+    period_label: فصل زمستان 1403
+    note: ''
+  - obligation: annual_return
+    description: اظهارنامه مالیاتی عملکرد مشاغل — تا پایان خرداد سال بعد
+    due_date_jalali: 1404/03/31
+    due_date_gregorian: '2025-06-21'
+    days_remaining: 98
+    penalty_rule: جریمه ۱۰٪ درآمد مشمول (ماده ۱۹۲ ق.م.م — غیرقابل بخشودگی)
+    source_id: TAX-QMM-CONSOLIDATED
+    verification_status: CORROBORATED_CURRENT
+    period_label: عملکرد 1403 (مشاغل)
+    note: ''
+  - obligation: annual_return
+    description: اظهارنامه مالیاتی عملکرد اشخاص حقوقی — تا ۴ ماه پس از پایان سال مالی
+    due_date_jalali: 1404/04/29
+    due_date_gregorian: '2025-07-20'
+    days_remaining: 127
+    penalty_rule: جریمه ۱٪ مالیات متعلق به‌ازای هر ماه تأخیر (حداکثر ۲۵٪)؛ ماده ۱۹۲ ق.م.م
+    source_id: TAX-QMM-CONSOLIDATED
+    verification_status: CORROBORATED_CURRENT
+    period_label: سال مالی 1403 (اشخاص حقوقی)
+    note: ''
+- id: penalty_art169_34_days
+  tool: penalty_estimate
+  args:
+    obligation: article_169_quarterly
+    due_date: 1405/07/16
+    filed_on: 1405/08/20
+    monthly_amount: 10000000000
+  expect:
+    obligation: article_169_quarterly
+    status: late
+    days_late: 34
+    rate: ۱٪ به‌ازای هر ماه شروع‌شده
+    amount: '200000000'
+    penalty_rule: جریمه ۱٪ مبلغ معاملات فصل (ماده ۱۹۹ ق.م.م) به‌ازای عدم تسلیم/تأخیر
+    source_id: TAX-QMM-CONSOLIDATED
+    verification_status: CORROBORATED_CURRENT
+    note: ضریب جریمه 0.02 روی مبلغ پایه (2 ماه شروع‌شده تأخیر)
+- id: penalty_vat_on_time
+  tool: penalty_estimate
+  args:
+    obligation: vat_return
+    due_date: 1405/07/15
+    filed_on: 1405/07/15
+    monthly_amount: 1000000000
+  expect:
+    obligation: vat_return
+    status: on_time
+    days_late: 0
+    rate: null
+    amount: null
+    penalty_rule: جریمه عدم تسلیم/تأخیر طبق ماده ۲۰ قانون ارزش افزوده (۱٪ عملکرد به‌ازای هر ماه تأخیر)
+    source_id: TAX-ADD-1400
+    verification_status: CORROBORATED_CURRENT
+    note: بدون جریمه تأخیر در این وضعیت
+- id: penalty_not_yet_due
+  tool: penalty_estimate
+  args:
+    obligation: vat_return
+    due_date: 1405/07/15
+    filed_on: 1405/07/01
+  expect:
+    obligation: vat_return
+    status: not_yet_due
+    days_late: 0
+    rate: null
+    amount: null
+    penalty_rule: جریمه عدم تسلیم/تأخیر طبق ماده ۲۰ قانون ارزش افزوده (۱٪ عملکرد به‌ازای هر ماه تأخیر)
+    source_id: TAX-ADD-1400
+    verification_status: CORROBORATED_CURRENT
+    note: بدون جریمه تأخیر در این وضعیت
+- id: penalty_business_flat_10
+  tool: penalty_estimate
+  args:
+    obligation: annual_return
+    due_date: 1405/03/31
+    filed_on: 1405/04/05
+    taxable_amount: 8000000000
+  expect:
+    obligation: annual_return
+    status: late
+    days_late: 5
+    rate: 10% درآمد مشمول (ماده ۱۹۲ — مقطوع)
+    amount: '800000000'
+    penalty_rule: جریمه ۱٪ مالیات متعلق به‌ازای هر ماه تأخیر (حداکثر ۲۵٪)؛ ماده ۱۹۲ ق.م.م
+    source_id: TAX-QMM-CONSOLIDATED
+    verification_status: CORROBORATED_CURRENT
+    note: ضریب جریمه 0.10 روی مبلغ پایه (1 ماه شروع‌شده تأخیر)
+- id: penalty_company_10_months
+  tool: penalty_estimate
+  args:
+    obligation: annual_return
+    due_date: 1405/04/29
+    filed_on: 1406/02/26
+    monthly_amount: 10000000000
+  expect:
+    obligation: annual_return
+    status: late
+    days_late: 300
+    rate: ۱٪ مالیات در ماه شروع‌شده، سقف ۲۵٪ (ماده ۱۹۲)
+    amount: '1000000000'
+    penalty_rule: جریمه ۱٪ مالیات متعلق به‌ازای هر ماه تأخیر (حداکثر ۲۵٪)؛ ماده ۱۹۲ ق.م.م
+    source_id: TAX-QMM-CONSOLIDATED
+    verification_status: CORROBORATED_CURRENT
+    note: ضریب جریمه 0.10 روی مبلغ پایه (10 ماه شروع‌شده تأخیر)
+- id: penalty_company_cap_25
+  tool: penalty_estimate
+  args:
+    obligation: annual_return
+    due_date: 1405/04/29
+    filed_on: 1408/06/10
+    monthly_amount: 10000000000
+  expect:
+    obligation: annual_return
+    status: late
+    days_late: 1138
+    rate: ۱٪ مالیات در ماه شروع‌شده، سقف ۲۵٪ (ماده ۱۹۲)
+    amount: '2500000000'
+    penalty_rule: جریمه ۱٪ مالیات متعلق به‌ازای هر ماه تأخیر (حداکثر ۲۵٪)؛ ماده ۱۹۲ ق.م.م
+    source_id: TAX-QMM-CONSOLIDATED
+    verification_status: CORROBORATED_CURRENT
+    note: ضریب جریمه 0.25 روی مبلغ پایه (38 ماه شروع‌شده تأخیر)
+- id: penalty_no_base_rate_only
+  tool: penalty_estimate
+  args:
+    obligation: article_169_quarterly
+    due_date: 1405/07/16
+    filed_on: 1405/08/20
+  expect:
+    obligation: article_169_quarterly
+    status: late
+    days_late: 34
+    rate: ۱٪ به‌ازای هر ماه شروع‌شده
+    amount: null
+    penalty_rule: جریمه ۱٪ مبلغ معاملات فصل (ماده ۱۹۹ ق.م.م) به‌ازای عدم تسلیم/تأخیر
+    source_id: TAX-QMM-CONSOLIDATED
+    verification_status: CORROBORATED_CURRENT
+    note: مبلغ پایه ارائه نشد؛ فقط نرخ جریمه گزارش می‌شود
+- id: penalty_unknown_obligation_error
+  tool: penalty_estimate
+  args:
+    obligation: mystery
+    due_date: 1405/07/16
+    filed_on: 1405/08/20
+  expect:
+    error: '''mystery'' is not a valid Obligation'
+    code: ValueError
+- id: moadian_4110
+  tool: moadian_error
+  args:
+    code: '4110'
+  expect:
+    code: '4110'
+    title: خطای عمومی اعتبارسنجی ساختار داده
+    cause: ساختار JSON ارسالی با اسکیمای الگوی موردنظر (inty) تطابق ندارد — فیلد الزامی غایب یا نوع داده اشتباه.
+    resolution: 'ساختار payload را با اسکیمای رسمی الگو (نوع ۱ تا ۷) مقایسه کنید؛ فیلدهای الزامی هدر/بدنه/پرداخت را تکمیل
+      و نوع داده‌ها (رشته/عدد) را دقیقاً مطابق مستندات بفرستید.
+
+      '
+    severity: blocker
+    verification_status: CORROBORATED_CURRENT
+    source: sppcco.com error list + mymotamed.ir
+    found: true
+- id: moadian_6115
+  tool: moadian_error
+  args:
+    code: '6115'
+  expect:
+    code: '6115'
+    title: خطای مربوط به حد مجاز فروش (ماده ۶)
+    cause: فروش مودی از حد مجاز دوره گذشته و صدور فاکتور با وضعیت «عدول» انجام شده است.
+    resolution: 'ظرفیت را افزایش دهید (پرداخت نقدی/تودیع چک صیادی تا ۲۰ روز پس از پایان فصل/ضمانت‌نامه) و سپس صورتحساب ارجاعی
+      اصلاحی برای رفع برچسب عدول صادر کنید.
+
+      '
+    severity: blocker
+    verification_status: CORROBORATED_CURRENT
+    source: docs/research_tax_inflation.md §1.3 + sppcco.com
+    found: true
+- id: moadian_2330
+  tool: moadian_error
+  args:
+    code: '2330'
+  expect:
+    code: '2330'
+    title: عدم اعتبار مقدار فیلد مبلغ/نرخ
+    cause: مقادیر fee/am/vra/vam با قواعد محاسباتی الگو نمی‌خوانند (خطای جمع یا نرخ خارج از بازه).
+    resolution: محاسبات هر سطر (am=fee×تعداد−dis و vam بر اساس vra) را قبل از ارسال بازبینی کنید.
+    severity: error
+    verification_status: CORROBORATED_CURRENT
+    source: sarayehesabdar.ir error list
+    found: true
+- id: moadian_unknown_code
+  tool: moadian_error
+  args:
+    code: '9999'
+  expect:
+    code: '9999'
+    found: false
+    note: این کد در دانش‌نامه موجود نیست. برای افزودن، snapshot رسمی خطا را ثبت کنید.
+- id: invoice_b2c_valid
+  tool: validate_invoice
+  args:
+    invoice:
+      header:
+        inty: 2
+        tins: '41134236658'
+        indatim: 1727000000000
+        tprdis: '500000'
+        tdis: '0'
+        tadis: '500000'
+        tvam: '45000'
+        todam: '0'
+        tbill: '545000'
+      body:
+      - sstid: '17100000000000000'
+        sstt: کالا
+        am: '500000'
+        fee: '500000'
+        ssrv: '1'
+        dis: '0'
+        vra: '0.09'
+        vam: '45000'
+        tsstam: '545000'
+      payment:
+      - pny: 1
+  expect:
+    is_valid: true
+    pattern: نوع دوم (B2C)
+    totals:
+      total_subject_amount: '500000'
+      total_vat_amount: '45000'
+      total_invoice_amount: '545000'
+    errors: []
+    warnings: []
+    note: اعتبارسنجی آفلاین ساختار و محاسبات؛ پذیرش نهایی توسط سامانه مؤدیان است.
+- id: invoice_b2b_missing_crn
+  tool: validate_invoice
+  args:
+    invoice:
+      header:
+        inty: 1
+        tins: '41134236658'
+        indatim: 1727000000000
+        tprdis: '500000'
+        tdis: '0'
+        tadis: '500000'
+        tvam: '45000'
+        todam: '0'
+        tbill: '545000'
+      body:
+      - sstid: '17100000000000000'
+        sstt: کالا
+        am: '500000'
+        fee: '500000'
+        ssrv: '1'
+        dis: '0'
+        vra: '0.09'
+        vam: '45000'
+        tsstam: '545000'
+      payment:
+      - pny: 1
+  expect:
+    is_valid: false
+    pattern: نوع اول (B2B)
+    totals:
+      total_subject_amount: '500000'
+      total_vat_amount: '45000'
+      total_invoice_amount: '545000'
+    errors:
+    - check: header.crn
+      message: الگوی نوع اول (B2B) نیازمند شناسه ملی/کد اقتصادی خریدار است
+    warnings: []
+    note: اعتبارسنجی آفلاین ساختار و محاسبات؛ پذیرش نهایی توسط سامانه مؤدیان است.
+- id: invoice_vam_mismatch
+  tool: validate_invoice
+  args:
+    invoice:
+      header:
+        inty: 2
+        tins: '41134236658'
+        indatim: 1727000000000
+        tprdis: '500000'
+        tdis: '0'
+        tadis: '500000'
+        tvam: '45000'
+        todam: '0'
+        tbill: '545000'
+      body:
+      - sstid: '17100000000000000'
+        sstt: کالا
+        am: '500000'
+        fee: '500000'
+        ssrv: '1'
+        dis: '0'
+        vra: '0.09'
+        vam: '40000'
+        tsstam: '545000'
+      payment:
+      - pny: 1
+  expect:
+    is_valid: false
+    pattern: نوع دوم (B2C)
+    totals:
+      total_subject_amount: '500000'
+      total_vat_amount: '40000'
+      total_invoice_amount: '540000'
+    errors:
+    - check: body[0].vam
+      message: 'مالیات ارزش افزوده سطر (vam=40000) با نرخ 0.09 روی am (500000) نمی‌خواند؛ موردانتظار: 45000'
+    - check: header.tvam
+      message: جمع مالیات کل (tvam=45000) با جمع سطرها (40000) نمی‌خواند
+    warnings: []
+    note: اعتبارسنجی آفلاین ساختار و محاسبات؛ پذیرش نهایی توسط سامانه مؤدیان است.
+- id: invoice_tbill_mismatch
+  tool: validate_invoice
+  args:
+    invoice:
+      header:
+        inty: 2
+        tins: '41134236658'
+        indatim: 1727000000000
+        tprdis: '500000'
+        tdis: '0'
+        tadis: '500000'
+        tvam: '45000'
+        todam: '0'
+        tbill: '540000'
+      body:
+      - sstid: '17100000000000000'
+        sstt: کالا
+        am: '500000'
+        fee: '500000'
+        ssrv: '1'
+        dis: '0'
+        vra: '0.09'
+        vam: '45000'
+        tsstam: '545000'
+      payment:
+      - pny: 1
+  expect:
+    is_valid: false
+    pattern: نوع دوم (B2C)
+    totals:
+      total_subject_amount: '500000'
+      total_vat_amount: '45000'
+      total_invoice_amount: '545000'
+    errors:
+    - check: header.tbill
+      message: مبلغ قابل پرداخت (tbill=540000) با tadis+tvam+todam (545000) نمی‌خواند
+    warnings: []
+    note: اعتبارسنجی آفلاین ساختار و محاسبات؛ پذیرش نهایی توسط سامانه مؤدیان است.
+- id: invoice_missing_sstid
+  tool: validate_invoice
+  args:
+    invoice:
+      header:
+        inty: 2
+        tins: '41134236658'
+        indatim: 1727000000000
+        tprdis: '500000'
+        tdis: '0'
+        tadis: '500000'
+        tvam: '45000'
+        todam: '0'
+        tbill: '545000'
+      body:
+      - sstid: ''
+        sstt: کالا
+        am: '500000'
+        fee: '500000'
+        ssrv: '1'
+        dis: '0'
+        vra: '0.09'
+        vam: '45000'
+        tsstam: '545000'
+      payment:
+      - pny: 1
+  expect:
+    is_valid: false
+    pattern: نوع دوم (B2C)
+    totals:
+      total_subject_amount: '500000'
+      total_vat_amount: '45000'
+      total_invoice_amount: '545000'
+    errors:
+    - check: body[0].sstid
+      message: شناسه کالا/خدمت در سطر 0 الزامی است
+    warnings: []
+    note: اعتبارسنجی آفلاین ساختار و محاسبات؛ پذیرش نهایی توسط سامانه مؤدیان است.
+- id: search_standards_43
+  tool: search_standards
+  args:
+    query: '43'
+  expect:
+    count: 4
+    standards:
+    - directory: 26-agriculture
+      name: accounting-standard-26
+      title: فعاليتهاي‌ كشاورزي‌
+      standard-number: '26'
+      revision: '1397'
+      ifrs-equivalent: IAS 41
+      title-en: Agriculture
+      phase: '4'
+      status: active
+      source: https://thdorsan.com/sam/codificated-standards
+      headings-count: '18'
+      clauses-count: '43'
+      sections-count: '15'
+    - directory: 31-non-current-assets-held-for-sale
+      name: accounting-standard-31
+      title: داراييهاي غيرجاري نگهداري شده براي فروش و عمليات متوقف شده
+      standard-number: '31'
+      revision: '1397'
+      ifrs-equivalent: IFRS 5
+      title-en: Non-current Assets Held for Sale
+      phase: '6'
+      status: active
+      source: https://thdorsan.com/sam/codificated-standards
+      headings-count: '31'
+      clauses-count: '43'
+      sections-count: '20'
+    - directory: 33-employee-benefits
+      name: accounting-standard-33
+      title: مزایای بازنشستگی کارکنان
+      standard-number: '33'
+      revision: '1397'
+      ifrs-equivalent: IAS 19
+      title-en: Employee Benefits
+      phase: '3'
+      status: active
+      source: https://thdorsan.com/sam/codificated-standards
+      headings-count: '43'
+      clauses-count: '91'
+      sections-count: '30'
+    - directory: 43-revenue-from-contracts
+      name: accounting-standard-43
+      title: فهرست‌ مندرجات
+      standard-number: '43'
+      revision: '1397'
+      ifrs-equivalent: IFRS 15
+      title-en: Revenue from Contracts with Customers
+      phase: '4'
+      status: active
+      source: https://thdorsan.com/sam/codificated-standards
+      headings-count: '0'
+      clauses-count: '133'
+      sections-count: '0'
+- id: search_standards_empty
+  tool: search_standards
+  args:
+    query: zzzz-no-match
+  expect:
+    count: 0
+    standards: []
+- id: get_standard_43
+  tool: get_standard
+  args:
+    standard: '43'
+  expect:
+    content: "---\nname: accounting-standard-43\ntitle: فهرست‌ مندرجات\nstandard-number: 43\nrevision: 1397\nifrs-equivalent:\
+      \ IFRS 15\ntitle-en: Revenue from Contracts with Customers\nphase: 4\nstatus: active\nsource: https://thdorsan.com/sam/codificated-standards\n\
+      headings-count: 0\nclauses-count: 133\nsections-count: 0\n---\n\n> [!IMPORTANT]\n> **Current applicability:** Standard\
+      \ 43 is effective for financial periods beginning 1404/01/01 and later and replaces Standards 3, 9 and 29 for those\
+      \ periods. Resolve the reporting period before applying this Skill. See `docs/CURRENT_RULES_1405.md`.\n\n# استاندارد\
+      \ حسابداری 43: فهرست‌ مندرجات\n\n## بندهای کلیدی\n\n- **بند 1:** هدف این استاندارد تعیین اصولی است که واحد تجاری برای\
+      \ گزارش اطلاعات مفید به استفاده‌کنندگان صورتهای مالی درباره ماهیت، مبلغ، زمانبندی و عدم اطمینان درآمد عملیاتی و جریانهای\
+      \ نقدی حاصل از قرارداد با یک مشتری، باید بکار گیرد.  دستیابی به هدف\n- **بند 2:** برای دستیابی به هدف بند 1، اصل محوری\
+      \ این استاندارد آن است که واحد تجاری باید درآمد عملیاتی را به‌گونه‌ای شناسایی کند که بیانگر انتقال کالاها یا خدمات تعهدشده\
+      \ به مشتریان به مبلغ مابه‌ازایی باشد که واحد تجاری انتظار دارد در قبال آن کالاها یا خدمات، نسبت به آن محق باشد.\n- **بند\
+      \ 3:** واحد تجاری هنگام بکارگیری این استاندارد، باید مفاد قرارداد و تمام واقعیتها و شرایط مربوط را مد نظر قرار دهد.\
+      \ واحد تجاری باید این استاندارد، شامل استفاده از هرگونه اقتضای عملی، را بطور یکنواخت برای قراردادهای دارای ویژگیهای\
+      \ مشابه و در شرایط مشابه بکار گیرد.\n- **بند 4:** این استاندارد، نحوه حسابداری یک قرارداد منفرد با مشتری را تعیین می‌کند.\
+      \ با وجود این، به عنوان یک اقتضای عملی، واحد تجاری در صورتی‌که بطور معقول انتظار داشته باشد آثار ناشی از بکارگیری این\
+      \ استاندارد برای مجموعه‌ای از قراردادهای (یا تعهدات عملکردی) دارای ویژگیهای مشابه بر صورتهای مالی، با آثار ناشی از\n\
+      - **بند 5:** واحد تجاری باید این استاندارد را برای تمام قراردادها با مشتریان، به استثنای موارد زیر، بکار گیرد:  الف.\
+      \ قراردادهای اجاره مشمول دامنه کاربرد استاندارد حسابداری 21 حسابداري‌ اجاره‌ها؛  ب. قراردادهای بیمه مشمول دامنه کاربرد\
+      \ استاندارد حسابداری 28 فعالیتهای بیمه عمومی؛  پ. ابزارهای مالی مشمول دامنه کاربر\n- **بند 6:** واحد تجاری این استاندارد\
+      \ را باید در مورد قراردادی (به استثنای قراردادهای اشاره‌شده در بند 5) بکار گیرد که طرف قرارداد مشتری است. مشتری شخصی\
+      \ است که در قبال پرداخت مابه‌ازا برای دستیابی به کالاها یا خدماتی که خروجی فعالیتهای عادی واحد تجاری است، قرارداد با\
+      \ واحد تجاری منعقد کرده است. برای مثال، در صورت\n- **بند 7:** بخشی از قرارداد با مشتری ممکن است در دامنه کاربرد این\
+      \ استاندارد و بخش دیگر آن، در دامنه کاربرد سایر استانداردهای اشاره‌شده در بند 5 قرار گیرد.  الف. اگر در سایر استانداردها\
+      \ چگونگی تفکیک و/ یا اندازه‌گیری اولیه یک یا چند بخش از قرارداد مشخص شده باشد، آنگاه واحد تجاری باید ابتدا الزامات تفکیک\
+      \ و/ یا ان\n- **بند 8:** چنانچه مخارج مختص دستیابی به قرارداد با مشتری و مخارج تحمل‌شده برای ایفای قرارداد با مشتری\
+      \ در دامنه کاربرد استاندارد دیگری قرار نگیرد، این استاندارد نحوه حسابداری مخارج مذکور را تعیین می‌کند (به بندهای 91\
+      \ تا 104 مراجعه شود). واحد تجاری باید بندهای مذکور را تنها برای مخارج تحمل‌شده مرتبط با قرارداد ب\n- **بند 9:** واحد\
+      \ تجاری باید قرارداد با یک مشتری، که در دامنه کاربرد این استاندارد است، را تنها هنگامی به حساب منظور کند که تمام معیارهای\
+      \ زیر احراز شود:  الف. طرفین، قرارداد را (به صورت کتبی، شفاهی یا طبق سایر رویه‌های مرسوم تجاری) تأیید کرده باشند و نسبت\
+      \ به انجام تعهدات خود، متعهد باشند؛  ب. واحد تجاری بتواند ح\n- **بند 10:** قرارداد، توافقی بین دو یا چند شخص است که\
+      \ حقوق و تعهدات الزام‌آور ایجاد می‌کند. الزام‌آور بودن حقوق و تعهدات در یک قرارداد، یک موضوع حقوقی است. قراردادها می‌توانند\
+      \ کتبی، شفاهی یا مبتنی ‌بر رویه‌های مرسوم تجاری باشند. رویه‌ها و فرایندهای انعقاد قراردادها با مشتریان، بین حوزه‌های\
+      \ مقرراتی، صنایع و واحده\n- **بند 11:** برخی قراردادها با مشتریان ممکن است مدت زمان معینی نداشته باشند و بتوان آنها\
+      \ را توسط هر یک از طرفهای قرارداد، در هر زمانی خاتمه داد یا تعدیل کرد. سایر قراردادها ممکن است بر مبنای دوره‌ای که در\
+      \ قرارداد مشخص شده است، بطور خودکار تمدید شوند. واحد تجاری باید این استاندارد را برای مدت قرارداد (یعنی دوره ق\n- **بند\
+      \ 12:** برای مقاصد بکارگیری این استاندارد، اگر هر یک از طرفین قرارداد، بدون جبران خسارت طرف (یا طرفهای) دیگر، از حق\
+      \ الزام‌آور یک‌جانبه برای خاتمه دادن به قراردادی که اجرا نشده است برخوردار باشد، قراردادی وجود ندارد. قرارداد در صورتی\
+      \ اجرانشده محسوب می‌شود که هر دو معیار زیر احراز شده باشد:  الف. واحد تجاری ه\n- **بند 13:** اگر قرارداد با مشتری معیارهای\
+      \ مندرج در بند 9 را در آغاز قرارداد احراز کند، واحد تجاری نباید این معیارها را مجدداً ارزیابی کند، مگر اینکه نشانه‌ای\
+      \ از تغییری عمده در واقعیتها و شرایط وجود داشته باشد. برای مثال، اگر توانایی مشتری برای پرداخت مابه‌ازا به میزان قابل\
+      \ ملاحظه‌ای کاهش یافته باشد، واحد تجاری \n- **بند 14:** اگر قرارداد با مشتری معیارهای مندرج در بند 9 را احراز نکند،\
+      \ واحد تجاری باید به ارزیابی قرارداد ادامه دهد تا تعیین نماید که آیا معیارهای مندرج در بند 9 متعاقباً احراز شده است\
+      \ یا خیر.\n- **بند 15:** هنگامی که قرارداد با مشتری معیارهای مندرج در بند 9 را احراز نمی‌کند و واحد تجاری مابه‌ازایی\
+      \ را از مشتری دریافت می‌کند، واحد تجاری تنها در صورتی باید مابه‌ازای دریافتی را به عنوان درآمد عملیاتی شناسایی کند که\
+      \ یکی از رویدادهای زیر واقع شده باشد:  الف. واحد تجاری تعهدات باقیمانده‌ای برای انتقال کالاها \n- **بند 16:** واحد تجاری\
+      \ باید مابه‌ازای دریافتی از مشتری را تا زمان وقوع یکی از رویدادهای مندرج در بند 15 یا تا زمانی که معیارهای مندرج در\
+      \ بند 9 متعاقباً احراز شود (به بند 14 مراجعه شود)، به عنوان بدهی شناسایی کند. این بدهی، با توجه به واقعیتها و شرایط\
+      \ مرتبط با قرارداد، یا بیانگر تعهد واحد تجاری به انتقال کالاها \n- **بند 17:** واحد تجاری، در صورت احراز یک یا چند معیار\
+      \ از معیارهای زیر، باید دو یا چند قرارداد را که هم‌زمان یا در زمانهای نزدیک به هم با یک مشتری (یا اشخاص وابسته به آن\
+      \ مشتری) منعقد کرده است، ترکیب کند و آنها را به عنوان قراردادی واحد در نظر بگیرد:  الف. قراردادها به صورت یک بسته با\
+      \ یک هدف تجاری واحد، مذاکره شد\n- **بند 18:** تعدیل قرارداد، تغییر در دامنه یا قیمت (یا هر دو) یک قرارداد است که به\
+      \ تایید طرفهای قرارداد رسیده است. در برخی صنایع و حوزه‌های مقرراتی، تعدیل قرارداد ممکن است به عنوان دستور تغییر، اصلاحیه،\
+      \ متمم یا الحاقیه قرارداد شناخته شود. تعدیل قرارداد زمانی وجود دارد که طرفهای قرارداد، تعدیلی را تأیید کنند که ی\n-\
+      \ **بند 19:** حتی در صورتی‌که طرفهای قرارداد درباره دامنه تعدیل یا قیمت تعدیل (یا هر دو)، اختلاف نظر داشته باشند، یا\
+      \ طرفهای قرارداد تغییر در دامنه قرارداد را تأیید کرده باشند اما هنوز تغییر متناظر در قیمت را تعیین نکرده باشند، ممکن\
+      \ است تعدیل قرارداد وجود داشته باشد. برای تعیین اینکه حقوق و تعهدات ایجادشده یا تغیی\n- **بند 20:** واحد تجاری باید\
+      \ تعدیل قرارداد را در صورت وجود هر دو شرط زیر، به عنوان قراردادی جداگانه در نظر بگیرد:  الف. دامنه قرارداد به دلیل اضافه\
+      \ کردن کالاها یا خدمات تعهدشده‌ای که طبق بندهای 26 تا 30 متمایز هستند، افزایش یابد؛ و  ب. قیمت قرارداد، به مبلغ مابه‌ازایی\
+      \ که نشان‌دهنده قیمت فروش مستقل کالاها یا خدما\n- **بند 21:** اگر طبق بند 20، تعدیل قرارداد به عنوان قرارداد جداگانه\
+      \ در نظر گرفته نشود، واحد تجاری باید کالاها یا خدمات تعهدشده‌ای که در تاریخ تعدیل قرارداد هنوز انتقال نیافته‌ است (یعنی\
+      \ کالاها یا خدمات تعهدشده باقیمانده) را به یکی از شیوه‌های زیر، هر کدام که کاربرد داشته باشد، به حساب منظور کند:  الف.\
+      \ اگر کالاها\n- **بند 22:** در آغاز قرارداد، واحد تجاری باید کالاها یا خدمات تعهدشده در قرارداد با مشتری را ارزیابی\
+      \ کند و هرگونه تعهد برای انتقال موارد زیر به مشتری را به عنوان یک تعهد عملکردی تشخیص دهد:  الف. یک کالا یا خدمت (یا\
+      \ بسته‌ای از کالاها یا خدمات) که متمایز است؛ یا  ب. یک مجموعه از کالاها یا خدمات متمایز که تا حد زیا\n- **بند 23:**\
+      \ الگوی انتقال یک مجموعه از کالاها یا خدمات متمایز، در صورت احراز هر دو معیار زیر یکسان خواهد بود:  الف. هر کالا یا\
+      \ خدمت متمایز در مجموعه‌ای که واحد تجاری متعهد به انتقال آن به مشتری است، معیارهای مندرج در بند 35 را برای در نظر گرفتن\
+      \ به عنوان تعهد عملکردی ایفاشده در طول زمان، احراز کند؛ و  ب. طبق بنده\n- **بند 24:** در قرارداد با مشتری، عموماً کالاها\
+      \ یا خدماتی که واحد تجاری متعهد به انتقال آنها به مشتری است، به صراحت مشخص می‌شود. با وجود این، تعهدات عملکردی مشخص‌شده\
+      \ در قرارداد با مشتری ممکن است محدود به کالاها یا خدماتی نباشد که به صراحت در قرارداد ذکر شده است. دلیل این موضوع آن\
+      \ است که قرارداد با مشتری ممکن است\n- **بند 25:** در تعهدات عملکردی، فعالیتهایی که واحد تجاری باید برای ایفای قرارداد\
+      \ تقبل کند، درج نمی‌شود مگر اینکه فعالیتهای مذکور کالا یا خدمتی را به مشتری انتقال دهند. برای مثال، ممکن است لازم باشد\
+      \ ارائه‌دهندگان خدمات، امور اداری گوناگونی را برای تنظیم قرارداد انجام دهند. اجرای این امور هیچ خدمتی را همزمان با اج\n\
+      - **بند 26:** کالاها یا خدمات تعهدشده، بسته به قرارداد ممکن است شامل موارد زیر باشد، اما محدود به این موارد نیست:  الف.\
+      \ فروش محصولات تولیدشده توسط یک واحد تجاری (برای مثال، موجودی محصولات یک واحد تولیدی)؛  ب. فروش کالاهای خریداری‌شده\
+      \ توسط واحد تجاری (برای مثال، موجودی کالای یک واحد بازرگانی)؛  پ. فروش حق نسبت به \n- **بند 27:** کالا یا خدمت تعهدشده\
+      \ به مشتری، در صورت احراز هر دو معیار زیر متمایز محسوب می‌شود:  الف. مشتری بتواند از آن کالا یا خدمت، به تنهایی یا همراه\
+      \ با سایر منابعی که به سهولت در دسترس است، منتفع شود (یعنی کالا یا خدمت قابلیت متمایز بودن را دارد)؛ و  ب. تعهد واحد\
+      \ تجاری برای انتقال آن کالا یا خدمت به مشتری، ا\n- **بند 28:** یک مشتری در صورتی می‌تواند طبق بند 27(الف) از یک کالا\
+      \ یا خدمت منتفع شود که آن کالا یا خدمت را بتواند استفاده کند، مصرف کند، در ازای مبلغی بیشتر از ارزش اسقاط، آن را به\
+      \ فروش برساند یا به شیوه‌ای نگهداری کند که منافع اقتصادی آتی ایجاد نماید. در مورد برخی کالاها یا خدمات، مشتری ممکن است\
+      \ بتواند از کالا \n- **بند 29:** هدف از ارزیابی اینکه تعهد واحد تجاری برای انتقال کالاها یا خدمات به مشتری، طبق بند\
+      \ 27(ب) بطور جداگانه قابل تشخیص است یا خیر، این است که مشخص شود ماهیت تعهد در متن قرارداد، انتقال هر یک از آن کالاها\
+      \ یا خدمات بطور جداگانه است یا انتقال یک قلم ترکیبی یا اقلامی است که کالاها یا خدمات مزبور، ورودی آنها م\n- **بند 30:**\
+      \ اگر کالا یا خدمت تعهدشده متمایز نباشد، واحد تجاری باید آن کالا یا خدمت را تا جایی با سایر کالاها یا خدمات تعهدشده\
+      \ ترکیب کند که بسته‌ای از کالاها یا خدمات متمایز را تشخیص دهد. در برخی موارد، این امر موجب می‌شود تمام کالاها یا خدمات\
+      \ تعهدشده در قرارداد، به عنوان یک تعهد عملکردی منفرد در نظر گرفته شوند.\n- **بند 31:** واحد تجاری باید زمانی (یا در\
+      \ طول زمانی) درآمد عملیاتی را شناسایی کند که یک تعهد عملکردی را از طریق انتقال کالا یا خدمت تعهدشده (یعنی یک دارایی)\
+      \ به مشتری ایفا نماید. یک دارایی زمانی (یا در طول زمانی) انتقال‌ می‌یابد که مشتری کنترل آن دارایی را به دست می‌آورد.\n\
+      - **بند 32:** برای هر تعهد عملکردی مشخص‌‌شده طبق بندهای 22 تا 30، واحد تجاری باید در آغاز قرارداد تعیین کند که آیا تعهد\
+      \ عملکردی را در طول زمان (طبق بندهای 35 تا 37) یا در نقطه‌ای از زمان (طبق بند 38) ایفا می‌کند. اگر واحد تجاری تعهد عملکردی\
+      \ را در طول زمان ایفا نکند، تعهد عملکردی در نقطه‌ای از زمان ایفا شده است.\n- **بند 33:** کالاها و خدمات، در زمان دریافت\
+      \ و استفاده، حتی اگر برای لحظاتی باشد، دارایی هستند (همانطور که در مورد بسیاری از خدمات اینگونه است). کنترل یک دارایی\
+      \ به توانایی هدایت استفاده از دارایی و کسب تقریباً تمام منافع باقیمانده دارایی اشاره دارد. کنترل شامل توانایی منع سایر\
+      \ اشخاص از هدایت استفاده از دارایی و ک\n- **بند 34:** واحد تجاری، هنگام ارزیابی اینکه یک مشتری کنترل یک دارایی را به\
+      \ دست آورده است یا خیر، باید هرگونه توافق بازخرید دارایی را مدنظر قرار دهد (به بندهای ب70 تا ب82 مراجعه شود).  تعهدات\
+      \ عملکردی ایفاشده در طول زمان\n- **بند 35:** واحد تجاری، در صورت احراز هر یک از معیارهای زیر، کنترل کالا یا خدمت را\
+      \ در طول زمان منتقل می‌کند و بنابراین، در طول زمان تعهد عملکردی را ایفا و درآمد عملیاتی را شناسایی می‌نماید:  الف. مشتری،\
+      \ در طول زمان ایفای تعهد عملکردی توسط واحد تجاری، منافع ایجادشده از عملکرد واحد تجاری را همزمان دریافت و مصرف ک\n- **بند\
+      \ 36:** دارایی ایجادشده از طریق عملکرد واحد تجاری، در صورتی برای واحد تجاری کاربرد جایگزین ندارد که واحد تجاری، در طول\
+      \ زمان ایجاد یا توسعه دارایی، با قیود قراردادی برای هدایت دارایی به منظور استفاده‌ای دیگر مواجه باشد یا برای هدایت دارایی\
+      \ در وضعیت تکمیل‌شده جهت استفاده‌‌ای دیگر محدودیت عملی داشته باشد. ارزی\n- **بند 37:** واحد تجاری هنگام ارزیابی اینکه\
+      \ طبق بند 35(پ) نسبت به پرداخت مشتری بابت عملکرد تکمیل‌شده تا آن تاریخ، حق الزام‌آور دارد یا خیر، باید شرایط قرارداد\
+      \ و نیز قوانین مرتبط با قرارداد را مدنظر قرار دهد. ضرورتی ندارد که حق نسبت به پرداخت مشتری بابت عملکرد تکمیل‌شده تا\
+      \ آن تاریخ، مبلغی ثابت باشد. با وجود این، \n- **بند 38:** اگر واحد تجاری تعهد عملکردی را طبق بندهای 35 تا 37 در طول\
+      \ زمان ایفا نکند، تعهد عملکردی در نقطه‌ای از زمان ایفا شده است. برای تعیین نقطه‌ای از زمان که در آن، مشتری کنترل دارایی\
+      \ تعهدشده را به دست می‌آورد و واحد تجاری تعهد عملکردی را ایفا می‌کند، واحد تجاری باید الزامات کنترل طبق بندهای 31 تا\
+      \ 34 را مد \n- **بند 39:** برای هر تعهد عملکردی که طبق بندهای 35 تا 37 در طول زمان ایفا می‌شود، واحد تجاری باید درآمد\
+      \ عملیاتی را در طول زمان از طریق اندازه‌گیری پیشرفت در ایفای کامل تعهد عملکردی مذکور شناسایی کند. هنگام اندازه‌گیری\
+      \ پیشرفت، هدف این است که عملکرد واحد تجاری در انتقال کنترل کالاها یا خدمات تعهدشده به مشتری (یعنی\n- **بند 40:** واحد\
+      \ تجاری باید از یک روش واحد برای اندازه‌گیری پیشرفت هر تعهد عملکردی ایفاشده در طول زمان استفاده کند و باید آن روش را\
+      \ بطور یکنواخت برای تعهدات عملکردی مشابه و در شرایط مشابه بکار گیرد. در پایان هر دوره گزارشگری، واحد تجاری باید پیشرفت\
+      \ در ایفای کامل تعهد عملکردی ایفاشده در طول زمان را تجدید اندازه‌\n- **بند 41:** روشهای مناسب اندازه‌گیری پیشرفت، شامل\
+      \ روشهای مبتنی بر خروجی و روشهای مبتنی بر ورودی است. برای بکارگیری روشهای مبتنی بر خروجی و روشهای مبتنی بر ورودی توسط\
+      \ واحد تجاری به منظور اندازه‌گیری پیشرفت در ایفای کامل تعهدات عملکردی، در بندهای ب14 تا ب19 رهنمود ارائه می‌شود. واحد\
+      \ تجاری، در تعیین روش مناسب برای\n- **بند 42:** واحد تجاری هنگام بکارگیری یک روش برای اندازه‌گیری پیشرفت باید هرگونه\
+      \ کالا یا خدمتی که کنترل آن را به مشتری منتقل نمی‌کند، از اندازه‌گیری پیشرفت مستثنی نماید. در مقابل، واحد تجاری باید\
+      \ هرگونه کالا یا خدمتی که کنترل آن را با ایفای تعهد عملکردی به مشتری منتقل می‌کند، در اندازه‌گیری پیشرفت در نظر بگیرد.\n\
+      - **بند 43:** واحد تجاری باید با تغییر شرایط در طول زمان، اندازه‌گیری پیشرفت را به‌روزآوری کند تا هرگونه تغییر در نتیجه\
+      \ تعهد عملکردی را منعکس نماید. چنین تغییراتی در اندازه‌گیری پیشرفت واحد تجاری، باید طبق استاندارد حسابداری 34 رویه‌های\
+      \ حسابداری، تغییر در برآوردهای حسابداری و اشتباهات، به عنوان تغییر در برآورد حس\n- **بند 44:** واحد تجاری تنها در صورتی\
+      \ که بتواند بطور معقول پیشرفت در ایفای کامل تعهد عملکردی را اندازه‌گیری کند، باید بابت تعهد عملکردی ایفاشده در طول زمان،\
+      \ درآمد عملیاتی شناسایی کند. چنانچه اطلاعات قابل اتکای لازم برای بکارگیری روش مناسب اندازه‌گیری پیشرفت وجود نداشته باشد،\
+      \ واحد تجاری نمی‌تواند پیشرفت در ایفای \n- **بند 45:** واحد تجاری در برخی شرایط (برای مثال، در مراحل ابتدایی قرارداد)\
+      \ ممکن است نتواند نتیجه یک تعهد عملکردی را بطور معقول اندازه‌گیری کند اما انتظار داشته باشد مخارج تحمل‌شده برای ایفای\
+      \ تعهد عملکردی را بازیافت نماید. در این شرایط، مادامی که واحد تجاری نتواند نتیجه تعهد عملکردی را بطور معقول اندازه‌گیری\
+      \ کند\n- **بند 46:** واحد تجاري، زمانی (یا در طول زمانی) که تعهد عملکردی ایفا می‌شود، باید قیمت معامله (که برآورد مابه‌ازای\
+      \ متغیر محدودشده طبق بندهای 56 تا 58 از آن مستثنی شده است) را که به آن تعهد عملکردی تخصیص یافته است، به عنوان درآمد\
+      \ عملیاتی شناسایی کند.  تعیین قیمت معامله\n- **بند 47:** واحد تجاری باید شرایط قرارداد و رویه‌های مرسوم تجاری خود را\
+      \ برای تعیین قیمت معامله در نظر بگیرد. قیمت معامله، مبلغ مابه‌ازایی است که واحد تجاری انتظار دارد در قبال انتقال کالاها\
+      \ یا خدمات تعهدشده به مشتری، نسبت به آن محق باشد، به استثنای مبالغی که به نمایندگی از اشخاص ثالث وصول می‌شود (برای مثال،\
+      \ مال\n- **بند 48:** ماهیت، زمانبندی و مبلغ مابه‌ازای تعهدشده توسط مشتری، بر برآورد قیمت معامله تأثیر می‌گذارد. هنگام\
+      \ تعیین قیمت معامله، واحد تجاری باید آثار تمام موارد زیر را در نظر بگیرد:  الف. مابه‌ازای متغیر (به بندهای 50 تا 55\
+      \ و 59 مراجعه شود)؛  ب. محدود کردن برآوردهای مابه‌ازای متغیر (به بندهای 56 تا 58 مراجعه شود\n- **بند 49:** واحد تجاری\
+      \ برای تعیین قیمت معامله باید فرض کند که کالاها یا خدمات، طبق مشخصات مندرج در قرارداد فعلی به مشتری انتقال خواهد یافت\
+      \ و قرارداد، فسخ، تمدید یا تعدیل نخواهد شد.  مابه‌ازای متغیر\n- **بند 50:** اگر مابه‌ازای تعهدشده در قرارداد شامل یک\
+      \ مبلغ متغیر باشد، واحد تجاری باید مبلغ مابه‌ازایی که در قبال انتقال کالاها یا خدمات تعهدشده به مشتری، نسبت به آن محق\
+      \ است را برآورد کند.\n\n## ارتباط با سایر استانداردها\n\n(نیاز به تکمیل دستی)\n\n## قواعد نرم‌افزاری\n\n```yaml\nvalidation_rules:\n\
+      \  - standard: 43\n  - rules:\n      - (نیاز به تعریف)\n```\n\n## متن کامل استاندارد\n\n<details>\n<summary>مشاهده متن\
+      \ کامل (کلیک کنید)</summary>\n\n\n\nفهرست‌ مندرجات\n\n‌\n\nبند\n\nهدف 1-4\n\nدستیابی به هدف 2-4\n\nدامنه کاربرد 5-8\n\
+      \nشناخت 9\n\nتشخیص قراردادها 9-16\n\nترکیب قراردادها 17\n\nتعدیل قرارداد 18-21\n\nتشخیص تعهدات عملکردی 22-30\n\nتعهدات\
+      \ موجود در قرارداد با مشتریان 24-25\n\nکالاها یا خدمات متمایز 26-30\n\nایفای تعهدات عملکردی 31-45\n\nتعهدات عملکردی\
+      \ ایفاشده در طول زمان 35-37\n\nتعهدات عملکردی ایفاشده در نقطه‌ای از زمان 38\n\nاندازه‌گیری پیشرفت در ایفای کامل تعهد\
+      \ عملکردی 39-45\n\nاندازه‌گیری 46-90\n\nتعیین قیمت معامله 47-72\n\nمابه‌ازای متغیر 50-59\n\nوجود جزء تأمین مالی بااهمیت\
+      \ در قرارداد 60-65\n\nمابه‌ازای غیرنقدی 66-69\n\nمابه‌ازای قابل پرداخت به مشتری 70-72\n\nتخصیص قیمت معامله به تعهدات\
+      \ عملکردی 73-86\n\nتخصیص بر مبنای قیمتهای فروش مستقل 76-80\n\nتخصیص تخفیف 81-83\n\nتخصیص مابه‌ازای متغیر 84-86\n\nتغییر\
+      \ در قیمت معامله 87-90\n\nبند\n\nمخارج قرارداد 91-104\n\nمخارج مختص دستیابی به قرارداد 91-94\n\nمخارج ایفای قرارداد\
+      \ 95-98\n\nاستهلاک و کاهش ارزش 99-104\n\nارائه 105-109\n\nافشا 110-129\n\nقرارداد با مشتریان 113-122\n\nتفکیک درآمد\
+      \ عملیاتی 114-115\n\nمانده حسابهای قرارداد 116-118\n\nتعهدات عملکردی 119\n\nقیمت معامله تخصیص‌یافته به تعهدات عملکردی\
+      \ باقیمانده 120-122\n\nقضاوتهای عمده صورت‌گرفته در بکارگیری این استاندارد 123-126\n\nتعیین زمانبندی ایفای تعهدات عملکردی\
+      \ 124-125\n\nتعیین قیمت معامله و مبالغ تخصیص‌یافته به تعهدات عملکردی 126\n\nداراییهای شناسایی‌شده حاصل از مخارج دستیابی\
+      \ به قرارداد با مشتری یا مخارج ایفای قرارداد با مشتری 127-128\n\nاقتضاهای عملی 129\n\nکنارگذاری سایر استانداردها 130\n\
+      \nتاریخ اجرا 131-132\n\nمطابقت با استانداردهای بین‌المللی گزارشگری مالی 133\n\nپیوستها\n\nپیوست الف\n\nپیوست ب\n\nپیوست\
+      \ پ\n\nهدف\n\n1 . هدف این استاندارد تعیین اصولی است که واحد تجاری برای گزارش اطلاعات مفید به استفاده‌کنندگان صورتهای\
+      \ مالی درباره ماهیت، مبلغ، زمانبندی و عدم اطمینان درآمد عملیاتی و جریانهای نقدی حاصل از قرارداد با یک مشتری، باید بکار\
+      \ گیرد.\n\nدستیابی به هدف\n\n2 . برای دستیابی به هدف بند 1، اصل محوری این استاندارد آن است که واحد تجاری باید درآمد\
+      \ عملیاتی را به‌گونه‌ای شناسایی کند که بیانگر انتقال کالاها یا خدمات تعهدشده به مشتریان به مبلغ مابه‌ازایی باشد که واحد\
+      \ تجاری انتظار دارد در قبال آن کالاها یا خدمات، نسبت به آن محق باشد.\n\n3 . واحد تجاری هنگام بکارگیری این استاندارد،\
+      \ باید مفاد قرارداد و تمام واقعیتها و شرایط مربوط را مد نظر قرار دهد. واحد تجاری باید این استاندارد، شامل استفاده از\
+      \ هرگونه اقتضای عملی، را بطور یکنواخت برای قراردادهای دارای ویژگیهای مشابه و در شرایط مشابه بکار گیرد.\n\n4 . این استاندارد،\
+      \ نحوه حسابداری یک قرارداد منفرد با مشتری را تعیین می‌کند. با وجود این، به عنوان یک اقتضای عملی، واحد تجاری در صورتی‌که\
+      \ بطور معقول انتظار داشته باشد آثار ناشی از بکارگیری این استاندارد برای مجموعه‌ای از قراردادهای (یا تعهدات عملکردی)\
+      \ دارای ویژگیهای مشابه بر صورتهای مالی، با آثار ناشی از بکارگیری این استاندارد برای هر یک از قراردادهای (یا تعهدات عملکردی)\
+      \ موجود در مجموعه مذکور تفاوت بااهمیتی نداشته باشد، می‌تواند این استاندارد را برای آن مجموعه بکار گیرد. واحد تجاری هنگام\
+      \ انجام حسابداری یک مجموعه قرارداد، باید از برآوردها و مفروضاتی استفاده کند که نشان‌دهنده اندازه و ترکیب آن مجموعه باشد.\n\
+      \nدامنه کاربرد\n\n5 . واحد تجاری باید این استاندارد را برای تمام قراردادها با مشتریان، به استثنای موارد زیر، بکار گیرد:\n\
+      \nالف. قراردادهای اجاره مشمول دامنه کاربرد استاندارد حسابداری 21 حسابداري‌ اجاره‌ها؛\n\nب. قراردادهای بیمه مشمول دامنه\
+      \ کاربرد استاندارد حسابداری 28 فعالیتهای بیمه عمومی؛\n\nپ. ابزارهای مالی مشمول دامنه کاربرد استاندارد حسابداری 15 حسابداری\
+      \ سرمایه‌گذاریها، استاندارد حسابداری 39 صورتهای مالی تلفیقی، استاندارد حسابداری 40 مشارکتها، استاندارد حسابداری 18 صورتهای\
+      \ مالی جداگانه و استاندارد حسابداری 20 سرمایه‌گذاری در واحدهای تجاری وابسته و مشارکتهای خاص؛ و\n\nت. مبادله‌های غیرپولی\
+      \ بین واحدهای تجاری دارای فعالیتهای تجاری همانند، برای تسهیل فروش به مشتریان یا مشتریان بالقوه. برای مثال، این استاندارد\
+      \ در خصوص قرارداد بین دو شرکت نفتی که توافق می‌‌‌‌‌‌کنند برای پاسخگویی به موقع به تقاضای مشتریان خود در مکانهای تعیین‌شده\
+      \ نفت را با یکدیگر مبادله کنند کاربرد ندارد.\n\n6 . واحد تجاری این استاندارد را باید در مورد قراردادی (به استثنای قراردادهای\
+      \ اشاره‌شده در بند 5) بکار گیرد که طرف قرارداد مشتری است. مشتری شخصی است که در قبال پرداخت مابه‌ازا برای دستیابی به\
+      \ کالاها یا خدماتی که خروجی فعالیتهای عادی واحد تجاری است، قرارداد با واحد تجاری منعقد کرده است. برای مثال، در صورتی‌\
+      \ که طرف قرارداد، به جای انعقاد قرارداد برای دستیابی به خروجی فعالیتهای عادی واحد تجاری، قراردادی را به منظور مشارکت\
+      \ در یک فعالیت یا فرایند منعقد کرده باشد که طرفین آن قرارداد در ریسکها و مزایای حاصل از آن فعالیت یا فرایند (نظیر ایجاد\
+      \ یک دارایی از طریق توافق همکاری) سهیم باشند، طرف قرارداد مشتری محسوب نمی‌شود.\n\n7 . بخشی از قرارداد با مشتری ممکن\
+      \ است در دامنه کاربرد این استاندارد و بخش دیگر آن، در دامنه کاربرد سایر استانداردهای اشاره‌شده در بند 5 قرار گیرد.\n\
+      \nالف. اگر در سایر استانداردها چگونگی تفکیک و/ یا اندازه‌گیری اولیه یک یا چند بخش از قرارداد مشخص شده باشد، آنگاه واحد\
+      \ تجاری باید ابتدا الزامات تفکیک و/ یا اندازه‌گیری مندرج در آن استانداردها را بکار گیرد. واحد تجاری باید مبلغ بخشی (یا\
+      \ بخشهایی) از قرارداد را که در ابتدا طبق سایر استانداردها اندازه‌گیری شده است، از قیمت معامله جدا کند و برای تخصیص مبلغ\
+      \ باقیمانده قیمت معامله (در صورت وجود) به هر تعهد عملکردی مشمول دامنه کاربرد این استاندارد و به سایر بخشهای قرارداد\
+      \ طبق بند 7(ب)، بندهای 73 تا 86 را بکار گیرد.\n\nب. اگر در سایر استانداردها چگونگی تفکیک و یا/ اندازه‌گیری اولیه یک\
+      \ یا چند بخش از قرارداد مشخص نشده باشد، آنگاه واحد تجاری باید این استاندارد را برای تفکیک و/ یا اندازه‌گیری اولیه آن\
+      \ بخش (یا بخشهای) قرارداد با مشتری بکار گیرد.\n\n8 . چنانچه مخارج مختص دستیابی به قرارداد با مشتری و مخارج تحمل‌شده\
+      \ برای ایفای قرارداد با مشتری در دامنه کاربرد استاندارد دیگری قرار نگیرد، این استاندارد نحوه حسابداری مخارج مذکور را\
+      \ تعیین می‌کند (به بندهای 91 تا 104 مراجعه شود). واحد تجاری باید بندهای مذکور را تنها برای مخارج تحمل‌شده مرتبط با قرارداد\
+      \ با مشتری (یا بخشی از آن قرارداد) که در دامنه کاربرد این استاندارد است، بکار گیرد.\n\nشناخت\n\nتشخیص قرارداد\n\n9 .\
+      \ واحد تجاری باید قرارداد با یک مشتری، که در دامنه کاربرد این استاندارد است، را تنها هنگامی به حساب منظور کند که تمام\
+      \ معیارهای زیر احراز شود:\n\nالف. طرفین، قرارداد را (به صورت کتبی، شفاهی یا طبق سایر رویه‌های مرسوم تجاری) تأیید کرده\
+      \ باشند و نسبت به انجام تعهدات خود، متعهد باشند؛\n\nب. واحد تجاری بتواند حقوق هر یک از طرفین را در ارتباط با کالاها\
+      \ یا خدماتی که باید انتقال یابد، تشخیص دهد؛\n\nپ. واحد تجاری بتواند شرایط پرداخت برای کالاها یا خدماتی که باید انتقال\
+      \ یابد را تشخیص دهد؛\n\nت. قرارداد محتوای تجاری داشته باشد (یعنی انتظار رود ریسک، زمانبندی یا مبلغ جریانهای نقدی آتی\
+      \ واحد تجاری، در نتیجه قرارداد تغییر کند)؛ و\n\nث. وصول مابه‌ازایی که واحد تجاری در قبال انتقال کالاها یا خدمات به مشتری\
+      \ نسبت به آن محق است، محتمل باشد. واحد تجاری در ارزیابی اینکه وصول مبلغ مابه‌ازا محتمل است یا خیر، تنها باید توانایی\
+      \ و قصد مشتری برای پرداخت مبلغ مابه‌ازای مذکور در سررسید را مورد توجه قرار دهد. اگر مبلغ مابه‌ازا به دلیل پیشنهاد مشوق\
+      \ قیمت به مشتری متغیر باشد، مبلغ مابه‌ازایی که واحد تجاری نسبت به آن محق است، ممکن است از قیمت ذکرشده در قرارداد کمتر\
+      \ باشد (به بند 52 مراجعه شود).\n\n10. قرارداد، توافقی بین دو یا چند شخص است که حقوق و تعهدات الزام‌آور ایجاد می‌کند.\
+      \ الزام‌آور بودن حقوق و تعهدات در یک قرارداد، یک موضوع حقوقی است. قراردادها می‌توانند کتبی، شفاهی یا مبتنی ‌بر رویه‌های\
+      \ مرسوم تجاری باشند. رویه‌ها و فرایندهای انعقاد قراردادها با مشتریان، بین حوزه‌های مقرراتی، صنایع و واحدهای تجاری متفاوت\
+      \ است. افزون بر این، رویه‌ها و فرایندهای مزبور ممکن است در داخل یک واحد تجاری نیز متفاوت باشد (برای مثال، ممکن است به\
+      \ طبقه مشتری یا ماهیت کالاها یا خدمات تعهدشده بستگی داشته باشد). واحد تجاری برای تعیین اینکه توافق با مشتری، حقوق و\
+      \ تعهدات الزام‌آور ایجاد می‌کند یا خیر، و چه زمانی حقوق و تعهدات الزام‌آور ایجاد می‌کند، باید این رویه‌ها و فرایندها\
+      \ را مدنظر قرار دهد.\n\n11. برخی قراردادها با مشتریان ممکن است مدت زمان معینی نداشته باشند و بتوان آنها را توسط هر یک\
+      \ از طرفهای قرارداد، در هر زمانی خاتمه داد یا تعدیل کرد. سایر قراردادها ممکن است بر مبنای دوره‌ای که در قرارداد مشخص\
+      \ شده است، بطور خودکار تمدید شوند. واحد تجاری باید این استاندارد را برای مدت قرارداد (یعنی دوره قراردادی) که در آن مدت،\
+      \ طرفین قرارداد حقوق و تعهدات الزام‌آور فعلی دارند، بکار گیرد.\n\n12. برای مقاصد بکارگیری این استاندارد، اگر هر یک از\
+      \ طرفین قرارداد، بدون جبران خسارت طرف (یا طرفهای) دیگر، از حق الزام‌آور یک‌جانبه برای خاتمه دادن به قراردادی که اجرا\
+      \ نشده است برخوردار باشد، قراردادی وجود ندارد. قرارداد در صورتی اجرانشده محسوب می‌شود که هر دو معیار زیر احراز شده باشد:\n\
+      \nالف. واحد تجاری هنوز کالاها یا خدمات تعهدشده را به مشتری انتقال نداده باشد؛ و\n\nب. واحد تجاری هنوز مابه‌ازایی در\
+      \ قبال کالاها یا خدمات تعهدشده دریافت نکرده باشد و هنوز نسبت به دریافت آن محق نباشد.\n\n13. اگر قرارداد با مشتری معیارهای\
+      \ مندرج در بند 9 را در آغاز قرارداد احراز کند، واحد تجاری نباید این معیارها را مجدداً ارزیابی کند، مگر اینکه نشانه‌ای\
+      \ از تغییری عمده در واقعیتها و شرایط وجود داشته باشد. برای مثال، اگر توانایی مشتری برای پرداخت مابه‌ازا به میزان قابل\
+      \ ملاحظه‌ای کاهش یافته باشد، واحد تجاری احتمال وصول مابه‌ازایی که در قبال انتقال مابقی کالاها یا خدمات به مشتری، نسبت\
+      \ به آن محق می‌شود را مجدداً ارزیابی می‌کند.\n\n14. اگر قرارداد با مشتری معیارهای مندرج در بند 9 را احراز نکند، واحد\
+      \ تجاری باید به ارزیابی قرارداد ادامه دهد تا تعیین نماید که آیا معیارهای مندرج در بند 9 متعاقباً احراز شده است یا خیر.\n\
+      \n15. هنگامی که قرارداد با مشتری معیارهای مندرج در بند 9 را احراز نمی‌کند و واحد تجاری مابه‌ازایی را از مشتری دریافت\
+      \ می‌کند، واحد تجاری تنها در صورتی باید مابه‌ازای دریافتی را به عنوان درآمد عملیاتی شناسایی کند که یکی از رویدادهای\
+      \ زیر واقع شده باشد:\n\nالف. واحد تجاری تعهدات باقیمانده‌ای برای انتقال کالاها یا خدمات به مشتری نداشته باشد و تمام\
+      \ یا تقریباً تمام مابه‌ازای تعهدشده توسط مشتری را دریافت کرده باشد و غیرقابل استرداد باشد؛ یا\n\nب. قرارداد خاتمه یافته\
+      \ باشد و مابه‌ازای دریافتی از مشتری غیرقابل استرداد باشد.\n\n16. واحد تجاری باید مابه‌ازای دریافتی از مشتری را تا زمان\
+      \ وقوع یکی از رویدادهای مندرج در بند 15 یا تا زمانی که معیارهای مندرج در بند 9 متعاقباً احراز شود (به بند 14 مراجعه\
+      \ شود)، به عنوان بدهی شناسایی کند. این بدهی، با توجه به واقعیتها و شرایط مرتبط با قرارداد، یا بیانگر تعهد واحد تجاری\
+      \ به انتقال کالاها یا خدمات در آینده است یا بیانگر تعهد واحد تجاری به استرداد مابه‌ازای دریافتی است. در هر دو حالت،\
+      \ بدهی مذکور باید به مبلغ مابه‌ازای دریافتی از مشتری اندازه‌گیری شود.\n\nترکیب قراردادها\n\n17. واحد تجاری، در صورت\
+      \ احراز یک یا چند معیار از معیارهای زیر، باید دو یا چند قرارداد را که هم‌زمان یا در زمانهای نزدیک به هم با یک مشتری\
+      \ (یا اشخاص وابسته به آن مشتری) منعقد کرده است، ترکیب کند و آنها را به عنوان قراردادی واحد در نظر بگیرد:\n\nالف. قراردادها\
+      \ به صورت یک بسته با یک هدف تجاری واحد، مذاکره شده باشند؛\n\nب. مبلغ مابه‌ازای قابل پرداخت در یک قرارداد به قیمت یا\
+      \ عملکرد قرارداد دیگر بستگی داشته باشد؛ یا\n\nپ. کالاها یا خدمات تعهدشده در قراردادها (یا برخی کالاها یا خدمات تعهدشده\
+      \ در هر یک از قراردادها)، طبق بندهای 22 تا 30 تعهد عملکردی واحدی باشند.\n\nتعدیل قرارداد\n\n18. تعدیل قرارداد، تغییر\
+      \ در دامنه یا قیمت (یا هر دو) یک قرارداد است که به تایید طرفهای قرارداد رسیده است. در برخی صنایع و حوزه‌های مقرراتی،\
+      \ تعدیل قرارداد ممکن است به عنوان دستور تغییر، اصلاحیه، متمم یا الحاقیه قرارداد شناخته شود. تعدیل قرارداد زمانی وجود\
+      \ دارد که طرفهای قرارداد، تعدیلی را تأیید کنند که یا به ایجاد حقوق و تعهدات الزام‌آور جدید یا به تغییر حقوق و تعهدات\
+      \ الزام‌آور موجود برای طرفهای قرارداد منجر ‌شود. تعدیل قرارداد می‌تواند به صورت کتبی، شفاهی یا بطور ضمنی طبق رویه‌های\
+      \ مرسوم تجاری تأیید شود. اگر طرفهای قرارداد، تعدیل قرارداد را تأیید نکرده باشند، واحد تجاری باید بکارگیری این استاندارد\
+      \ را برای قرارداد موجود، تا زمان تأیید تعدیل قرارداد ادامه دهد.\n\n19. حتی در صورتی‌که طرفهای قرارداد درباره دامنه تعدیل\
+      \ یا قیمت تعدیل (یا هر دو)، اختلاف نظر داشته باشند، یا طرفهای قرارداد تغییر در دامنه قرارداد را تأیید کرده باشند اما\
+      \ هنوز تغییر متناظر در قیمت را تعیین نکرده باشند، ممکن است تعدیل قرارداد وجود داشته باشد. برای تعیین اینکه حقوق و تعهدات\
+      \ ایجادشده یا تغییریافته از طریق تعدیل، الزام‌آور است یا خیر، واحد تجاری باید تمام واقعیتها و شرایط مرتبط از جمله شرایط\
+      \ قرارداد و شواهد دیگر را مدنظر قرار دهد. اگر طرفهای قرارداد، تغییر در دامنه قرارداد را تأیید کرده باشند، اما هنوز تغییر\
+      \ متناظر در قیمت را تعیین نکرده باشند، واحد تجاری باید طبق بندهای 50 تا 54 در ارتباط با برآورد مابه‌ازای متغیر و بندهای\
+      \ 56 تا 58 در ارتباط با محدودکردن برآوردهای مابه‌ازای متغیر، تغییر در قیمت معامله که از تعدیل ناشی می‌شود را برآورد\
+      \ کند.\n\n20 . واحد تجاری باید تعدیل قرارداد را در صورت وجود هر دو شرط زیر، به عنوان قراردادی جداگانه در نظر بگیرد:\n\
+      \nالف. دامنه قرارداد به دلیل اضافه کردن کالاها یا خدمات تعهدشده‌ای که طبق بندهای 26 تا 30 متمایز هستند، افزایش یابد؛\
+      \ و\n\nب. قیمت قرارداد، به مبلغ مابه‌ازایی که نشان‌دهنده قیمت فروش مستقل کالاها یا خدمات تعهدشده اضافی و هرگونه تعدیل\
+      \ مقتضی در آن قیمت جهت انعکاس شرایط آن قرارداد خاص است، افزایش یابد. برای مثال، واحد تجاری ممکن است قیمت فروش مستقل\
+      \ یک کالا یا خدمت اضافی را بابت تخفیفی که مشتری دریافت می‌کند تعدیل کند، زیرا ضرورتی ندارد واحد تجاری مخارج فروشی را\
+      \ تحمل کند که در صورت فروش کالا یا خدمت مشابه به یک مشتری جدید، متحمل می‌شد.\n\n21. اگر طبق بند 20، تعدیل قرارداد به\
+      \ عنوان قرارداد جداگانه در نظر گرفته نشود، واحد تجاری باید کالاها یا خدمات تعهدشده‌ای که در تاریخ تعدیل قرارداد هنوز\
+      \ انتقال نیافته‌ است (یعنی کالاها یا خدمات تعهدشده باقیمانده) را به یکی از شیوه‌های زیر، هر کدام که کاربرد داشته باشد،\
+      \ به حساب منظور کند:\n\nالف. اگر کالاها یا خدمات باقیمانده، متمایز از کالاها یا خدمات انتقال‌یافته در تاریخ تعدیل قرارداد\
+      \ یا قبل از آن باشد، واحد تجاری باید تعدیل قرارداد را به‌گونه‌ای به حساب منظور کند که گویی قرارداد موجود خاتمه یافته\
+      \ و یک قرارداد جدید منعقد شده است. مبلغ مابه‌ازایی که باید به تعهدات عملکردی باقیمانده (یا کالاها یا خدمات متمایز باقیمانده\
+      \ در یک تعهد عملکردی منفرد مشخص‌شده طبق بند 22(ب)) تخصیص یابد، مجموع موارد زیر است:\n\n1 . مابه‌ازای تعهدشده توسط مشتری\
+      \ (شامل مبالغی که قبلاً از مشتری دریافت شده است) که در برآورد قیمت معامله منظور شده و به عنوان درآمد عملیاتی شناسایی\
+      \ نشده است؛ و\n\n2 . مابه‌ازای تعهدشده به عنوان بخشی از تعدیل قرارداد.\n\nب. اگر کالاها یا خدمات باقیمانده، متمایز نباشند\
+      \ و، در نتیجه بخشی از تعهد عملکردی منفردی را تشکیل دهند که قسمتی از آن تا تاریخ تعدیل قرارداد ایفا شده است، واحد تجاری\
+      \ باید تعدیل قرارداد را به‌گونه‌ای به حساب منظور کند که گویی بخشی از قرارداد موجود است. اثر تعدیل قرارداد بر قیمت معامله\
+      \ و اندازه‌گیری پیشرفت واحد تجاری در ایفای کامل تعهد عملکردی، در تاریخ تعدیل قرارداد به عنوان تعدیل درآمد عملیاتی (افزایش\
+      \ یا کاهش درآمد عملیاتی) شناسایی می‌شود (یعنی تعدیل درآمد عملیاتی بر مبنای آثار انباشته تغییرات).\n\nپ. اگر کالاها یا\
+      \ خدمات باقیمانده ترکیبی از موارد (الف) و (ب) باشد، واحد تجاری باید آثار تعدیل بر تعهدات عملکردی ایفانشده (شامل تعهداتی\
+      \ که بخشی از آن ایفا نشده است) در قرارداد تعدیل‌شده را به شیوه‌ای به حساب منظور کند که با اهداف این بند سازگار باشد.\n\
+      \nتشخیص تعهدات عملکردی\n\n22 . در آغاز قرارداد، واحد تجاری باید کالاها یا خدمات تعهدشده در قرارداد با مشتری را ارزیابی\
+      \ کند و هرگونه تعهد برای انتقال موارد زیر به مشتری را به عنوان یک تعهد عملکردی تشخیص دهد:\n\nالف. یک کالا یا خدمت (یا\
+      \ بسته‌ای از کالاها یا خدمات) که متمایز است؛ یا\n\nب. یک مجموعه از کالاها یا خدمات متمایز که تا حد زیادی یکسان هستند\
+      \ و الگوی انتقال آنها به مشتری یکسان است (به بند 23 مراجعه شود).\n\n23 . الگوی انتقال یک مجموعه از کالاها یا خدمات متمایز،\
+      \ در صورت احراز هر دو معیار زیر یکسان خواهد بود:\n\nالف. هر کالا یا خدمت متمایز در مجموعه‌ای که واحد تجاری متعهد به\
+      \ انتقال آن به مشتری است، معیارهای مندرج در بند 35 را برای در نظر گرفتن به عنوان تعهد عملکردی ایفاشده در طول زمان، احراز\
+      \ کند؛ و\n\nب. طبق بندهای 39 تا 40، به منظور اندازه‌گیری پیشرفت واحد تجاری در ایفای کامل تعهد عملکردی برای انتقال هر\
+      \ کالا یا خدمت متمایز در آن مجموعه به مشتری، از شیوه یکسانی استفاده شود.\n\nتعهدات در قرارداد با مشتریان\n\n24 . در\
+      \ قرارداد با مشتری، عموماً کالاها یا خدماتی که واحد تجاری متعهد به انتقال آنها به مشتری است، به صراحت مشخص می‌شود. با\
+      \ وجود این، تعهدات عملکردی مشخص‌شده در قرارداد با مشتری ممکن است محدود به کالاها یا خدماتی نباشد که به صراحت در قرارداد\
+      \ ذکر شده است. دلیل این موضوع آن است که قرارداد با مشتری ممکن است شامل تعهداتی باشد که بطور ضمنی از طریق رویه‌های مرسوم\
+      \ تجاری، سیاستها یا بیانیه‌های خاص منتشرشده واحد تجاری بیان شده است، مشروط بر اینکه، در زمان انعقاد قرارداد، تعهدات\
+      \ مذکور توقع به‌جایی در مشتری ایجاد کند که واحد تجاری آن کالا یا خدمات را به مشتری منتقل خواهد کرد.\n\n25 . در تعهدات\
+      \ عملکردی، فعالیتهایی که واحد تجاری باید برای ایفای قرارداد تقبل کند، درج نمی‌شود مگر اینکه فعالیتهای مذکور کالا یا\
+      \ خدمتی را به مشتری انتقال دهند. برای مثال، ممکن است لازم باشد ارائه‌دهندگان خدمات، امور اداری گوناگونی را برای تنظیم\
+      \ قرارداد انجام دهند. اجرای این امور هیچ خدمتی را همزمان با اجرای آن، به مشتری منتقل نمی‌کند. بنابراین، این فعالیتهای\
+      \ تنظیم قرارداد، تعهد عملکردی محسوب نمی‌شود.\n\nکالاها یا خدمات متمایز\n\n26 . کالاها یا خدمات تعهدشده، بسته به قرارداد\
+      \ ممکن است شامل موارد زیر باشد، اما محدود به این موارد نیست:\n\nالف. فروش محصولات تولیدشده توسط یک واحد تجاری (برای\
+      \ مثال، موجودی محصولات یک واحد تولیدی)؛\n\nب. فروش کالاهای خریداری‌شده توسط واحد تجاری (برای مثال، موجودی کالای یک واحد\
+      \ بازرگانی)؛\n\nپ. فروش حق نسبت به کالاها یا خدمات خریداری‌شده توسط یک واحد تجاری (برای مثال، فروش بلیط توسط یک واحد\
+      \ تجاری که به عنوان اصیل، طبق توصیف بندهای ب34 تا ب42، عمل می‌کند)؛\n\nت. انجام وظیفه (یا وظایفی) برای مشتری، که بطور\
+      \ قراردادی در مورد آن توافق شده است؛\n\nث. ارائه خدمت آمادگی ‌برای فراهم کردن کالاها یا خدمات (برای مثال، به‌روزآوری\
+      \ از پیش‌ تعیین‌نشده نرم‌‌افزار که بر مبنای ”در صورت در دسترس بودن“ عرضه می‌شود) یا ارائه خدمت فراهم کردن کالاها یا\
+      \ خدمات در دسترس برای مشتری جهت استفاده به محض اینکه مشتری تصمیم بگیرد؛\n\nج. ارائه خدمت فراهم کردن بستر انتقال کالاها\
+      \ یا خدمات به مشتری برای شخصی دیگر (برای مثال، عمل به عنوان نماینده شخصی دیگر، طبق توصیف بندهای ب34 تا ب42)؛\n\nچ. اعطای\
+      \ حق نسبت به کالاها یا خدماتی که قرار است در آینده ارائه شود، به‌گونه‌ای که مشتری بتواند آن را مجدداً برای مشتریان خود\
+      \ فراهم کند یا به آنها بفروشد (برای مثال، یک واحد تجاری که محصول خود را به یک واحد بازرگانی می‌فروشد، متعهد می‌شود کالا\
+      \ یا خدمتی اضافی را به فردی که آن محصول را از واحد بازرگانی خریداری می‌کند، انتقال دهد)؛\n\nح. ساخت، تولید یا ایجاد\
+      \ یک دارایی از جانب یک مشتری؛\n\nخ. اعطای مجوز (به بندهای ب56 تا ب69 مراجعه شود)؛ و\n\nد. اعطای اختیار خرید کالاها یا\
+      \ خدمات اضافی (در صورتی که اختیارهای مذکور حق بااهمیتی برای مشتری ایجاد کند، طبق توصیف بندهای ب43 تا ب47).\n\n27 . کالا\
+      \ یا خدمت تعهدشده به مشتری، در صورت احراز هر دو معیار زیر متمایز محسوب می‌شود:\n\nالف. مشتری بتواند از آن کالا یا خدمت،\
+      \ به تنهایی یا همراه با سایر منابعی که به سهولت در دسترس است، منتفع شود (یعنی کالا یا خدمت قابلیت متمایز بودن را دارد)؛\
+      \ و\n\nب. تعهد واحد تجاری برای انتقال آن کالا یا خدمت به مشتری، از سایر تعهدات مندرج در قرارداد بطور جداگانه قابل تشخیص\
+      \ باشد (یعنی تعهد برای انتقال کالا یا خدمت، در متن قرارداد متمایز شده باشد).\n\n28 . یک مشتری در صورتی می‌تواند طبق\
+      \ بند 27(الف) از یک کالا یا خدمت منتفع شود که آن کالا یا خدمت را بتواند استفاده کند، مصرف کند، در ازای مبلغی بیشتر از\
+      \ ارزش اسقاط، آن را به فروش برساند یا به شیوه‌ای نگهداری کند که منافع اقتصادی آتی ایجاد نماید. در مورد برخی کالاها یا\
+      \ خدمات، مشتری ممکن است بتواند از کالا یا خدمت، به تنهایی منتفع شود. در مورد برخی دیگر از کالاها یا خدمات، مشتری ممکن\
+      \ است بتواند از کالا یا خدمت تنها در ترکیب با منابع دیگری که به سهولت در دسترس است، منتفع شود. منبع به سهولت در دسترس،\
+      \ کالا یا خدمتی است که بطور جداگانه به فروش می‌رسد (توسط واحد تجاری یا واحد تجاری دیگر) یا منبعی است که مشتری قبلاً\
+      \ آن را از واحد تجاری (شامل کالاها یا خدماتی که واحد تجاری طبق قرارداد، قبلاً به مشتری منتقل کرده است) یا از سایر معاملات\
+      \ یا رویدادها به دست آورده است. عوامل گوناگون ممکن است شواهدی فراهم کند که نشان می‌دهد مشتری می‌تواند از کالا یا خدمت،\
+      \ به تنهایی یا در ترکیب با سایر منابع به سهولت در دسترس منتفع شود. برای مثال، این موضوع که واحد تجاری یک کالا یا خدمت\
+      \ را معمولاً بطور جداگانه می‌فروشد، نشان می‌دهد که مشتری می‌تواند از آن کالا یا خدمت، به تنهایی یا در ترکیب با سایر\
+      \ منابع به سهولت در دسترس، منتفع شود.\n\n29 . هدف از ارزیابی اینکه تعهد واحد تجاری برای انتقال کالاها یا خدمات به مشتری،\
+      \ طبق بند 27(ب) بطور جداگانه قابل تشخیص است یا خیر، این است که مشخص شود ماهیت تعهد در متن قرارداد، انتقال هر یک از آن\
+      \ کالاها یا خدمات بطور جداگانه است یا انتقال یک قلم ترکیبی یا اقلامی است که کالاها یا خدمات مزبور، ورودی آنها می‌باشد.\
+      \ عواملی که نشان می‌دهد دو یا چند تعهد واحد تجاری برای انتقال کالاها یا خدمات به مشتری، بطور جداگانه قابل تشخیص نیست\
+      \ شامل موارد زیر است، اما محدود به این موارد نیست:\n\nالف. واحد تجاری خدمت قابل ملاحظه‌ای برای یکپارچه‌سازی آن کالاها\
+      \ یا خدمات تعهدشده در قرارداد با سایر کالاها یا خدمات تعهدشده در قرارداد ارائه می‌کند تا به بسته‌ای از کالاها یا خدماتی\
+      \ دست یابد که نشان‌دهنده یک خروجی ترکیبی یا چندین خروجی است که مشتری برای دستیابی به آن خروجیها، قرارداد را منعقد کرده\
+      \ است. به عبارت دیگر، واحد تجاری از آن کالاها یا خدمات به عنوان ورودی استفاده می‌کند تا یک خروجی ترکیبی یا چندین خروجی\
+      \ مشخص‌شده توسط مشتری را تولید کند یا تحویل دهد. یک خروجی ترکیبی یا چندین خروجی ممکن است شامل بیش از یک مرحله، عنصر\
+      \ یا واحد باشد.\n\nب. یک یا چند کالا یا خدمت تعهدشده در قرارداد، بطور قابل ملاحظه‌ای یک یا چند کالا یا خدمت دیگر تعهدشده\
+      \ در قرارداد را تعدیل یا سفارشی‌سازی کند، یا بطور قابل ملاحظه‌ای توسط یک یا چند کالا یا خدمت دیگر تعهدشده در قرارداد\
+      \ تعدیل یا سفارشی‌سازی شود.\n\nپ. کالاها یا خدمات، وابستگی یا ارتباط بسیار زیادی با یکدیگر داشته باشند. به عبارت دیگر،\
+      \ هر یک از کالاها یا خدمات، بطور قابل ملاحظه‌ای تحت تأثیر یک یا چند کالا یا خدمت دیگر مندرج در قرارداد قرار گیرد. برای\
+      \ مثال، در برخی موارد، دو یا چند کالا یا خدمت به این دلیل بطور قابل ملاحظه‌ای تحت تأثیر یکدیگر قرار می‌گیرند که واحد\
+      \ تجاری نمی‌تواند از طریق انتقال هر کدام از آن کالاها یا خدمات بطور مستقل از دیگری، تعهد خود را ایفا کند.\n\n30 . اگر\
+      \ کالا یا خدمت تعهدشده متمایز نباشد، واحد تجاری باید آن کالا یا خدمت را تا جایی با سایر کالاها یا خدمات تعهدشده ترکیب\
+      \ کند که بسته‌ای از کالاها یا خدمات متمایز را تشخیص دهد. در برخی موارد، این امر موجب می‌شود تمام کالاها یا خدمات تعهدشده\
+      \ در قرارداد، به عنوان یک تعهد عملکردی منفرد در نظر گرفته شوند.\n\nایفای تعهدات عملکردی\n\n31 . واحد تجاری باید زمانی\
+      \ (یا در طول زمانی) درآمد عملیاتی را شناسایی کند که یک تعهد عملکردی را از طریق انتقال کالا یا خدمت تعهدشده (یعنی یک\
+      \ دارایی) به مشتری ایفا نماید. یک دارایی زمانی (یا در طول زمانی) انتقال‌ می‌یابد که مشتری کنترل آن دارایی را به دست\
+      \ می‌آورد.\n\n32 . برای هر تعهد عملکردی مشخص‌‌شده طبق بندهای 22 تا 30، واحد تجاری باید در آغاز قرارداد تعیین کند که\
+      \ آیا تعهد عملکردی را در طول زمان (طبق بندهای 35 تا 37) یا در نقطه‌ای از زمان (طبق بند 38) ایفا می‌کند. اگر واحد تجاری\
+      \ تعهد عملکردی را در طول زمان ایفا نکند، تعهد عملکردی در نقطه‌ای از زمان ایفا شده است.\n\n33 . کالاها و خدمات، در زمان\
+      \ دریافت و استفاده، حتی اگر برای لحظاتی باشد، دارایی هستند (همانطور که در مورد بسیاری از خدمات اینگونه است). کنترل یک\
+      \ دارایی به توانایی هدایت استفاده از دارایی و کسب تقریباً تمام منافع باقیمانده دارایی اشاره دارد. کنترل شامل توانایی\
+      \ منع سایر اشخاص از هدایت استفاده از دارایی و کسب منافع حاصل از دارایی است. منافع یک دارایی، جریانهای نقدی (جریانهای\
+      \ نقدی ورودی یا جلوگیری از خروج جریانهای نقدی) بالقوه‌ای است که بطور مستقیم یا غیرمستقیم، به شیوه‌های متعدد از جمله\
+      \ موارد زیر می‌تواند به دست آِید:\n\nالف. استفاده از دارایی برای تولید کالاها یا ارائه خدمات (شامل خدمات عمومی)؛\n\n\
+      ب. استفاده از دارایی برای افزایش ارزش سایر داراییها؛\n\nپ. استفاده از دارایی برای تسویه بدهیها یا کاهش هزینه‌ها؛\n\n\
+      ت. فروش یا معاوضه دارایی؛\n\nث. وثیقه گذاشتن دارایی برای تضمین یک وام؛ و\n\nج. نگهداری دارایی.\n\n34 . واحد تجاری، هنگام\
+      \ ارزیابی اینکه یک مشتری کنترل یک دارایی را به دست آورده است یا خیر، باید هرگونه توافق بازخرید دارایی را مدنظر قرار\
+      \ دهد (به بندهای ب70 تا ب82 مراجعه شود).\n\nتعهدات عملکردی ایفاشده در طول زمان\n\n35 . واحد تجاری، در صورت احراز هر\
+      \ یک از معیارهای زیر، کنترل کالا یا خدمت را در طول زمان منتقل می‌کند و بنابراین، در طول زمان تعهد عملکردی را ایفا و\
+      \ درآمد عملیاتی را شناسایی می‌نماید:\n\nالف. مشتری، در طول زمان ایفای تعهد عملکردی توسط واحد تجاری، منافع ایجادشده از\
+      \ عملکرد واحد تجاری را همزمان دریافت و مصرف کند (به بندهای ب3 تا ب4 مراجعه شود)؛\n\nب. عملکرد واحد تجاری، دارایی (برای\
+      \ مثال، کار در جریان پیشرفت) را ایجاد کند یا توسعه دهد که مشتری در طول زمان ایجاد یا توسعه دارایی، آن را کنترل کند (به\
+      \ بند ب5 مراجعه شود)؛یا\n\nپ. عملکرد واحد تجاری، دارایی با کاربرد جایگزین برای واحد تجاری ایجاد نکند (به بند 36 مراجعه\
+      \ شود) و واحد تجاری نسبت به پرداخت مشتری بابت عملکرد تکمیل‌شده تا آن تاریخ، حق الزام‌آور داشته باشد (به بند 37 مراجعه\
+      \ شود).\n\n36 . دارایی ایجادشده از طریق عملکرد واحد تجاری، در صورتی برای واحد تجاری کاربرد جایگزین ندارد که واحد تجاری،\
+      \ در طول زمان ایجاد یا توسعه دارایی، با قیود قراردادی برای هدایت دارایی به منظور استفاده‌ای دیگر مواجه باشد یا برای\
+      \ هدایت دارایی در وضعیت تکمیل‌شده جهت استفاده‌‌ای دیگر محدودیت عملی داشته باشد. ارزیابی اینکه دارایی برای واحد تجاری\
+      \ کاربرد جایگزین دارد یا خیر، در آغاز قرارداد صورت می‌‌گیرد. پس از آغاز قرارداد، واحد تجاری نباید ارزیابی کاربرد جایگزین\
+      \ دارایی را به‌روزآوری کند، مگر اینکه طرفهای قرارداد، تعدیلی در قرارداد را تأیید کنند که به موجب آن، تعهد عملکردی اساساً\
+      \ تغییر کند. در بندهای ب6 تا ب8، رهنمودهای ارزیابی اینکه دارایی برای واحد تجاری کاربرد جایگزین دارد یا خیر، ارائه شده\
+      \ است.\n\n37 . واحد تجاری هنگام ارزیابی اینکه طبق بند 35(پ) نسبت به پرداخت مشتری بابت عملکرد تکمیل‌شده تا آن تاریخ،\
+      \ حق الزام‌آور دارد یا خیر، باید شرایط قرارداد و نیز قوانین مرتبط با قرارداد را مدنظر قرار دهد. ضرورتی ندارد که حق نسبت\
+      \ به پرداخت مشتری بابت عملکرد تکمیل‌شده تا آن تاریخ، مبلغی ثابت باشد. با وجود این، اگر قرارداد به دلایلی غیر از عدم\
+      \ ایفای تعهد توسط واحد تجاری، به وسیله مشتری یا شخص دیگری خاتمه یابد، واحد تجاری باید در تمام طول مدت قرارداد، نسبت\
+      \ به مبلغی محق باشد که حداقل، عملکرد تکمیل‌شده توسط واحد تجاری تا آن تاریخ را جبران کند. در بندهای ب9 تا ب13، در مورد\
+      \ ارزیابی وجود و الزام‌آور بودن حق نسبت به پرداخت مشتری و اینکه حق واحد تجاری نسبت به پرداخت مشتری، واحد تجاری را به\
+      \ پرداخت مشتری بابت عملکرد تکمیل‌شده تا آن تاریخ محق می‌کند یا خیر، رهنمود ارائه شده است.\n\nتعهدات عملکردی ایفاشده\
+      \ در نقطه‌ای از زمان\n\n38 . اگر واحد تجاری تعهد عملکردی را طبق بندهای 35 تا 37 در طول زمان ایفا نکند، تعهد عملکردی\
+      \ در نقطه‌ای از زمان ایفا شده است. برای تعیین نقطه‌ای از زمان که در آن، مشتری کنترل دارایی تعهدشده را به دست می‌آورد\
+      \ و واحد تجاری تعهد عملکردی را ایفا می‌کند، واحد تجاری باید الزامات کنترل طبق بندهای 31 تا 34 را مد نظر قرار دهد. افزون\
+      \ بر این، واحد تجاری باید نشانه‌های انتقال کنترل، که شامل موارد زیر است، اما محدود به آنها نیست، را در نظر بگیرد:\n\n\
+      الف. واحد تجاری حق فعلی نسبت به پرداخت مشتری بابت دارایی داشته باشد- چنانچه مشتری در حال حاضر متعهد به پرداخت بابت دارایی\
+      \ باشد، این موضوع ممکن است نشان دهد که مشتری توانایی هدایت استفاده از دارایی مورد مبادله را کسب کرده و تقریباً تمام\
+      \ منافع باقیمانده حاصل از آن دارایی را به دست آورده است.\n\nب. مشتری مالکیت قانونی دارایی را داشته باشد- مالکیت قانونی\
+      \ ممکن است نشان ‌دهد که کدام یک از طرفهای قرارداد توانایی هدایت استفاده از دارایی را دارد و تقریباً تمام منافع باقیمانده\
+      \ حاصل از دارایی را به دست می‌آورد، یا می‌تواند دسترسی واحدهای تجاری دیگر به منافع مذکور را محدود کند. بنابراین، انتقال\
+      \ مالکیت قانونی یک دارایی ممکن است نشان دهد که مشتری کنترل دارایی را به دست آورده است. اگر واحد تجاری مالکیت قانونی\
+      \ را صرفاً به منظور محافظت در برابر عدم پرداختهای مشتری حفظ کند، این حق واحد تجاری مانع به دست آوردن کنترل دارایی توسط\
+      \ مشتری نمی‌شود.\n\nپ. واحد تجاری تصرف فیزیکی دارایی را منتقل کرده باشد- تصرف فیزیکی دارایی ممکن است نشان دهد مشتری\
+      \ توانایی هدایت استفاده از دارایی را دارد و تقریباً تمام منافع باقیمانده دارایی را به دست می‌آورد، یا می‌تواند دسترسی\
+      \ واحدهای تجاری دیگر به منافع مذکور را محدود کند. با وجود این، تصرف فیزیکی و کنترل دارایی، ممکن است همزمان با یکدیگر\
+      \ وجود نداشته باشند. برای مثال، در برخی توافقهای بازخرید و در برخی قراردادهای حق‌العملکاری، مشتری یا حق‌العمل‌کار ممکن\
+      \ است تصرف فیزیکی دارایی تحت کنترل واحد تجاری را داشته باشد. در مقابل، در برخی توافقهای فروش و نگهداری، واحد تجاری ممکن\
+      \ است تصرف فیزیکی دارایی تحت کنترل مشتری را داشته باشد. در بندهای ب70 تا ب82، ب83 تا ب84 و ب85 تا ب88، به ترتیب رهنمودهایی\
+      \ درباره حسابداری توافقهای بازخرید، توافقهای حق‌العملکاری و توافقهای فروش و نگهداری ارائه شده است.\n\nت. مشتری ریسکها\
+      \ و مزایای عمده مالکیت دارایی را داشته باشد- انتقال ریسکها و مزایای عمده مالکیت یک دارایی به مشتری ممکن است نشان دهد\
+      \ آن مشتری، توانایی هدایت استفاده از دارایی و تقریباً تمام منافع باقیمانده حاصل از دارایی را به دست آورده است. با وجود\
+      \ این، هنگام ارزیابی ریسکها و مزایای مالکیت دارایی تعهدشده، واحد تجاری باید ریسکی که منجر به ایجاد تعهد عملکردی جداگانه،\
+      \ مازاد بر تعهد عملکردی انتقال دارایی می‌شود را مستثنی کند. برای مثال، واحد تجاری ممکن است کنترل دارایی را به مشتری\
+      \ انتقال داده باشد، اما هنوز تعهد عملکردی اضافی برای ارائه خدمات حفاظت و نگهداری مرتبط با دارایی انتقال‌یافته را ایفا\
+      \ نکرده باشد.\n\nث. مشتری دارایی را پذیرفته باشد- پذیرش دارایی توسط مشتری ممکن است بیانگر آن باشد که مشتری توانایی هدایت\
+      \ استفاده از دارایی و تقریباً تمام منافع باقیمانده حاصل از دارایی را به دست آورده است. برای ارزیابی تأثیر شرطهای قراردادی\
+      \ پذیرش توسط مشتری بر زمان انتقال کنترل دارایی، واحد تجاری باید رهنمود مندرج در بندهای ب89 تا ب92 را مورد توجه قرار\
+      \ دهد.\n\nاندازه‌گیری پیشرفت در ایفای کامل تعهد عملکردی\n\n39 . برای هر تعهد عملکردی که طبق بندهای 35 تا 37 در طول زمان\
+      \ ایفا می‌شود، واحد تجاری باید درآمد عملیاتی را در طول زمان از طریق اندازه‌گیری پیشرفت در ایفای کامل تعهد عملکردی مذکور\
+      \ شناسایی کند. هنگام اندازه‌گیری پیشرفت، هدف این است که عملکرد واحد تجاری در انتقال کنترل کالاها یا خدمات تعهدشده به\
+      \ مشتری (یعنی ایفای تعهد عملکردی واحد تجاری) نشان داده شود.\n\n40 . واحد تجاری باید از یک روش واحد برای اندازه‌گیری\
+      \ پیشرفت هر تعهد عملکردی ایفاشده در طول زمان استفاده کند و باید آن روش را بطور یکنواخت برای تعهدات عملکردی مشابه و در\
+      \ شرایط مشابه بکار گیرد. در پایان هر دوره گزارشگری، واحد تجاری باید پیشرفت در ایفای کامل تعهد عملکردی ایفاشده در طول\
+      \ زمان را تجدید اندازه‌گیری کند.\n\nروشهای اندازه‌گیری پیشرفت\n\n41 . روشهای مناسب اندازه‌گیری پیشرفت، شامل روشهای مبتنی\
+      \ بر خروجی و روشهای مبتنی بر ورودی است. برای بکارگیری روشهای مبتنی بر خروجی و روشهای مبتنی بر ورودی توسط واحد تجاری\
+      \ به منظور اندازه‌گیری پیشرفت در ایفای کامل تعهدات عملکردی، در بندهای ب14 تا ب19 رهنمود ارائه می‌شود. واحد تجاری، در\
+      \ تعیین روش مناسب برای اندازه‌گیری پیشرفت، باید ماهیت کالا یا خدمتی که متعهد است به مشتری منتقل کند را مدنظر قرار دهد.\n\
+      \n42 . واحد تجاری هنگام بکارگیری یک روش برای اندازه‌گیری پیشرفت باید هرگونه کالا یا خدمتی که کنترل آن را به مشتری منتقل\
+      \ نمی‌کند، از اندازه‌گیری پیشرفت مستثنی نماید. در مقابل، واحد تجاری باید هرگونه کالا یا خدمتی که کنترل آن را با ایفای\
+      \ تعهد عملکردی به مشتری منتقل می‌کند، در اندازه‌گیری پیشرفت در نظر بگیرد.\n\n43 . واحد تجاری باید با تغییر شرایط در\
+      \ طول زمان، اندازه‌گیری پیشرفت را به‌روزآوری کند تا هرگونه تغییر در نتیجه تعهد عملکردی را منعکس نماید. چنین تغییراتی\
+      \ در اندازه‌گیری پیشرفت واحد تجاری، باید طبق استاندارد حسابداری 34 رویه‌های حسابداری، تغییر در برآوردهای حسابداری و\
+      \ اشتباهات، به عنوان تغییر در برآورد حسابداری در نظر گرفته شود.\n\nاندازه‌گیری معقول پیشرفت\n\n44 . واحد تجاری تنها\
+      \ در صورتی که بتواند بطور معقول پیشرفت در ایفای کامل تعهد عملکردی را اندازه‌گیری کند، بای\n\n</details>"
+- id: get_standard_missing
+  tool: get_standard
+  args:
+    standard: '9999'
+  expect:
+    content: Standard '9999' not found
+- id: unknown_tool_error
+  tool: no_such_tool
+  args: {}
+  expect:
+    error: 'Unknown tool: no_such_tool'
+    code: ValueError
