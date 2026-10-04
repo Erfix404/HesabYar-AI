@@ -1,0 +1,11 @@
+"""Shared pytest fixtures for the HesabYar test suite."""
+
+from __future__ import annotations
+
+import pytest
+
+
+@pytest.fixture
+def anyio_backend() -> str:
+    """Run anyio-marked async tests on asyncio."""
+    return "asyncio"

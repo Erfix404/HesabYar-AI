@@ -1,0 +1,142 @@
+# Legal source registry — provenance for every legal/tax fact used by code.
+#
+# Schema mirrors ARCHITECTURE.md §1.3. Rules:
+#   - verification_status: VERIFIED only for text bundled in this repository or an
+#     official consolidated text with amendment history.
+#   - CORROBORATED_CURRENT = current per multiple reliable sources; usable for
+#     advisory answers WITH provenance echo, but requires pinning an official
+#     snapshot before production submission logic may rely on it.
+#   - Effective dates are Jalali strings (YYYY/MM/DD) unless suffixed _greg.
+#   - snapshot_uri/sha256 are set when an immutable snapshot is pinned.
+
+sources:
+  # ---------------------------------------------------------------
+  # Accounting standards (VERIFIED_TEXT per docs/CURRENT_RULES_1405.md §2)
+  # ---------------------------------------------------------------
+  - source_id: STD-43-REV-1404
+    domain: accounting_standard
+    authority: سازمان حسابرسی ایران (Audit Organization of Iran)
+    document_number_or_version: "43 (revision 1404)"
+    title: درآمد عملیاتی حاصل از قرارداد با مشتریان
+    published_at: "1404/01/01"
+    effective_from: "1404/01/01"
+    effective_to: null
+    retrieved_at: "1405/06/29"
+    canonical_url: https://github.com/Amirezamky9/HesabYar-AI/blob/master/standards/43-revenue-from-contracts/source/standard.md
+    snapshot_uri: standards/43-revenue-from-contracts/source/standard.md
+    sha256: null
+    verification_status: VERIFIED
+    verified_by: bundled-source-paragraphs-130-132
+    verified_at: "1405/06/29"
+    notes: Effective for periods beginning 1404/01/01; replaces Standards 3, 9, 29. Bundled text verified via paragraphs 130-132.
+
+  - source_id: STD-44-REV-1404
+    domain: accounting_standard
+    authority: سازمان حسابرسی ایران (Audit Organization of Iran)
+    document_number_or_version: "44 (approved 1404)"
+    title: اجاره‌ها
+    published_at: "1404/01/01"
+    effective_from: "1405/01/01"
+    effective_to: null
+    retrieved_at: "1405/06/29"
+    canonical_url: https://github.com/Amirezamky9/HesabYar-AI/blob/master/standards/44-leases/source/standard.md
+    snapshot_uri: standards/44-leases/source/standard.md
+    sha256: null
+    verification_status: VERIFIED
+    verified_by: bundled-source-paragraphs-102-104
+    verified_at: "1405/06/29"
+    notes: Effective for periods beginning 1405/01/01; replaces Standard 21. Bundled text verified via paragraphs 102-104.
+
+  - source_id: STD-15-LEGACY-1380
+    domain: accounting_standard
+    authority: سازمان حسابرسی ایران (Audit Organization of Iran)
+    document_number_or_version: "15 (legacy, effective 1380)"
+    title: حسابداری سرمایه‌گذاری‌ها (نسخه قدیمی)
+    published_at: "1380/01/01"
+    effective_from: "1380/01/01"
+    effective_to: "1404/12/29"
+    retrieved_at: "1405/06/29"
+    canonical_url: https://github.com/Amirezamky9/HesabYar-AI/blob/master/standards/15-investments/source/standard.md
+    snapshot_uri: standards/15-investments/source/standard.md
+    sha256: null
+    verification_status: RETIRED
+    verified_by: null
+    verified_at: null
+    notes: BLOCKED_SOURCE_GAP for periods beginning 1405/01/01+; bundled text is pre-1404-revision (paragraph 61 states effective 1380). Do not use for 1405+.
+
+  # ---------------------------------------------------------------
+  # Direct tax law (consolidated official text — CORROBORATED_CURRENT)
+  # ---------------------------------------------------------------
+  - source_id: TAX-QMM-CONSOLIDATED
+    domain: tax
+    authority: سازمان امور مالیاتی کشور (INTA) / مصوب مجلس
+    document_number_or_version: consolidated-with-amendments
+    title: قانون مالیات‌های مستقیم (متن تجمیعی با اصلاحات)
+    published_at: null
+    effective_from: "1380/01/01"
+    effective_to: null
+    retrieved_at: "1405/06/29"
+    canonical_url: https://nezamat.ir/post-28895/
+    snapshot_uri: null
+    sha256: null
+    verification_status: CORROBORATED_CURRENT
+    verified_by: docs/CURRENT_RULES_1405.md review
+    verified_at: "1405/06/29"
+    notes: Consolidated Direct Tax Law; current per review. Articles 84/101/105/131/140/148/169/192/274 parameters referenced from this record.
+
+  # ---------------------------------------------------------------
+  # VAT (ADD) law + budget rate mechanism
+  # ---------------------------------------------------------------
+  - source_id: TAX-ADD-1400
+    domain: tax
+    authority: مجلس شورای اسلامی / سازمان امور مالیاتی کشور
+    document_number_or_version: "قانون دائمی مالیات بر ارزش افزوده 1400/03/02"
+    title: قانون مالیات بر ارزش افزوده
+    published_at: "1400/03/02"
+    effective_from: "1400/04/01"
+    effective_to: null
+    retrieved_at: "1405/06/29"
+    canonical_url: https://zamani.tax/articles/law/%D9%82%D8%A7%D9%86%D9%88%D9%86-%D9%85%D8%A7%D9%84%DB%8C%D8%A7%D8%AA-%D8%A8%D8%B1-%D8%B3%D9%88%D8%AF%D8%A7%DA%AF%D8%B1%DB%8C
+    snapshot_uri: null
+    sha256: null
+    verification_status: CORROBORATED_CURRENT
+    verified_by: docs/CURRENT_RULES_1405.md review
+    verified_at: "1405/06/29"
+    notes: Articles 7/8/9 VAT law. Rate mechanism per budje (ب) تبصره ۶ بودجه سالانه; 1403+ rate 10% per tasnim corroboration.
+
+  # ---------------------------------------------------------------
+  # Point-of-Sale Terminals & Taxpayer System law (Moadian)
+  # ---------------------------------------------------------------
+  - source_id: TAX-POS-LAW-1398
+    domain: tax
+    authority: مجلس شورای اسلامی
+    document_number_or_version: "مصوب 1398/07/21 با اصلاحیه ماده ۷ قانون تسهیل تکالیف مودیان 1402/08/23"
+    title: قانون پایانه‌های فروشگاهی و سامانه مؤدیان
+    published_at: "1398/07/21"
+    effective_from: "1399/01/01"
+    effective_to: null
+    retrieved_at: "1405/06/29"
+    canonical_url: https://github.com/Amirezamky9/HesabYar-AI/blob/master/docs/research_tax_inflation.md
+    snapshot_uri: docs/research_tax_inflation.md
+    sha256: null
+    verification_status: CORROBORATED_CURRENT
+    verified_by: docs/CURRENT_RULES_1405.md review
+    verified_at: "1405/06/29"
+    notes: Article 6 sales-cap mechanics documented in bundled research (docs/research_tax_inflation.md §1); coefficient raised 3x→5x per 1402 amendment. Protocol-level facts (endpoints, TaxID algorithm) are NOT covered by this record.
+
+  - source_id: TAX-BUDGET-1405-PARAMS
+    domain: tax
+    authority: مجلس شورای اسلامی / سازمان امور مالیاتی کشور
+    document_number_or_version: "بودجه سال 1405 + تبصره‌های قانون مالیات‌های مستقیم"
+    title: پارامترهای سالانه مالیاتی 1405 (معافیت ماده ۸۴، ۱۰۱، سقف ماده ۱۰۰، رشد ابرازی)
+    published_at: "1404/11/25"
+    effective_from: "1405/01/01"
+    effective_to: null
+    retrieved_at: "1405/06/29"
+    canonical_url: https://www.tasnimnews.ir/fa/news/1404/11/25/3516503/
+    snapshot_uri: null
+    sha256: null
+    verification_status: CORROBORATED_CURRENT
+    verified_by: docs/CURRENT_RULES_1405.md §3 review
+    verified_at: "1405/06/29"
+    notes: Annual parameters cross-corroborated by tasnimnews reporting. Must be pinned to an official budget-law snapshot before production activation.

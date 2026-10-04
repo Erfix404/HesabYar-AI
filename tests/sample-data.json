@@ -132,7 +132,7 @@
     "change_in_receivables": -50000000,
     "change_in_inventory": -30000000,
     "change_in_payables": 40000000,
-    "change_in_other_working_capital": 0,
+    "change_in_other_working_capital": -310000000,
     "income_tax_paid": -180000000,
     "other_adjustments": 0,
     "net_cash_from_operating": 860000000,

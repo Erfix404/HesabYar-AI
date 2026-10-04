@@ -1,0 +1,94 @@
+# Effective-dated Iranian tax parameters (legislation-as-code).
+#
+# Rules:
+#   - Values are int (Rials where unit=IRR) or string-Decimal (rates like "0.10").
+#   - Floats are forbidden and rejected at load time.
+#   - Every interval carries a source_id registered in sources.yaml.
+#   - Jalali effective windows (YYYY/MM/DD); open-ended = effective_to: null.
+#   - Never add an interval without a source; never guess a value for a year
+#     whose budget law has not been reviewed (resolver fails closed instead).
+#
+# Annual figures below are the 1405/current baseline reviewed in
+# docs/CURRENT_RULES_1405.md §3 (CORROBORATED_CURRENT) and the bundled
+# Moadian research (CORROBORATED_CURRENT).
+
+parameters:
+  vat_rate:
+    unit: rate
+    description: نرخ عمومی مالیات بر ارزش افزوده (ماده ۷ قانون دائمی ارزش افزوده + تبصره ۶ بودجه سالانه)
+    intervals:
+      - value: "0.09"
+        effective_from: "1400/04/01"
+        effective_to: "1402/12/29"
+        source_id: TAX-ADD-1400
+        note: نرخ پایه قانون دائمی ۹٪
+      - value: "0.10"
+        effective_from: "1403/01/01"
+        effective_to: null
+        source_id: TAX-ADD-1400
+        note: افزایش ۱ واحد درصدی طبق بند (ر) تبصره ۶ بودجه ۱۴۰۳؛ ۱۰٪ تا ابلاغ نرخ جدید
+
+  article_84_annual_salary_exemption:
+    unit: IRR
+    description: سقف معافیت مالیات حقوق سالانه (ماده ۸۴ ق.م.م)
+    intervals:
+      - value: 4800000000
+        effective_from: "1405/01/01"
+        effective_to: null
+        source_id: TAX-BUDGET-1405-PARAMS
+        note: معافیت سالانه ۱۴۰۵ — نرخ‌های پلکانی حقوق باید جداگانه مدل شوند
+
+  article_101_annual_business_exemption:
+    unit: IRR
+    description: معافیت سالانه درآمد مشاغل (ماده ۱۰۱ ق.م.م)
+    intervals:
+      - value: 2800000000
+        effective_from: "1405/01/01"
+        effective_to: null
+        source_id: TAX-BUDGET-1405-PARAMS
+        note: مبنای حداقل فروش سالانه ماده ۶ برای واحدهای بدون سابقه
+
+  article_100_flat_tax_sales_ceiling:
+    unit: IRR
+    description: سقف فروش مشمول مالیات مقطوع/ساده‌سازی‌شده تبصره ماده ۱۰۰ (ماده ۱۰۵-مکرر)
+    intervals:
+      - value: 720000000000
+        effective_from: "1404/01/01"
+        effective_to: null
+        source_id: TAX-BUDGET-1405-PARAMS
+        note: مربوط به عملکرد ۱۴۰۴ / فرآیند اداری ۱۴۰۵ — سال عملکرد و سال ابراز جدا مدل شده‌اند
+
+  article_131_declared_income_growth_threshold:
+    unit: rate
+    description: آستانه رشد درآمد ابرازی برای مشوق‌های تبصره ۷ ماده ۱۰۵ / تبصره ماده ۱۳۱
+    intervals:
+      - value: "0.45"
+        effective_from: "1404/01/01"
+        effective_to: null
+        source_id: TAX-BUDGET-1405-PARAMS
+        note: مقایسه درآمد ابرازی عملکرد ۱۴۰۴ با ۱۴۰۳
+
+  article_6_sales_cap_coefficient:
+    unit: multiplier
+    description: ضریب سقف مجاز فروش هر دوره (ماده ۶ قانون پایانه‌های فروشگاهی) نسبت به فروش مشمول دوره متناظر سال قبل
+    intervals:
+      - value: 3
+        effective_from: "1399/01/01"
+        effective_to: "1402/08/23"
+        source_id: TAX-POS-LAW-1398
+        note: ضریب اولیه قانون ۱۳۹۸
+      - value: 5
+        effective_from: "1402/08/24"
+        effective_to: null
+        source_id: TAX-POS-LAW-1398
+        note: ضریب ۵ برابر طبق ماده ۷ قانون تسهیل تکالیف مودیان (مصوب ۱۴۰۲/۰۸/۲۳)
+
+  invoice_buyer_confirmation_window_days:
+    unit: days
+    description: مهلت تایید یا رد صورتحساب خرید توسط خریدار در کارپوشه (تبصره ۱ ماده ۸ ارزش افزوده)
+    intervals:
+      - value: 30
+        effective_from: "1400/04/01"
+        effective_to: null
+        source_id: TAX-ADD-1400
+        note: عدم اظهارنظر در مهلت = تایید خودکار

@@ -25,6 +25,7 @@ class RuleSeverity(StrEnum):
 
     ERROR = "error"
     WARNING = "warning"
+    INFO = "info"
 
 
 @unique
