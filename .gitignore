@@ -70,3 +70,8 @@ standards/*/source/media/
 standards/*/source/*.docx
 standards/*/source/s*.doc
 scripts/test_*.py
+
+# Python build artifacts
+dist/
+build/
+*.egg-info/
